@@ -1,1 +1,26 @@
-<a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
+
+{{#if more}}
+  <div class="long-result">
+    <span class="less" {{action "showMore" false}}>-</span>
+    <a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
+
+    <div class="extra-result-info">
+      <dl>
+        <dt>hash</dt><dd>{{hit.hash}}</dd>
+        <dt>title</dt><dd>{{{hit.title}}}</dd>
+        {{#if hit.description}}
+          <dt>description</dt><dd>{{{hit.description}}}</dd>
+        {{/if}}
+        <dt>type</dt><dd>{{hit.type}}</dd>
+        {{#if hit.size}}
+          <dt>size</dt><dd>{{hit.size}} bytes</dd>
+        {{/if}}
+      </dl>
+    </div>    
+  </div>
+{{else}}
+  <div class="short-result">
+    <span class="more" {{action "showMore" true}}>+</span>
+    <a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
+  </div>
+{{/if}}
