@@ -3,14 +3,23 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   queryParams: {
-    q: { refreshModel: true }
+    search: {
+      refreshModel: true
+    }
   },
+  search: null,
   ajax: inject(),
-  model( { q: searchString } ) {
-    console.log(`Searching for ${searchString}`);
-    return this.get('ajax').request('/v1/search', {
-      method: 'GET',
-      data: { q: searchString }
-    });
+  model( { search } ) {
+    if( search ) {
+      return this.get('ajax').request('/v1/search', {
+        method: 'GET',
+        data: { search }
+      }).catch( (err) => {
+        window.lasterr = err;
+        throw err;
+      } );
+    } else {
+      return null;
+    }
   }
 });

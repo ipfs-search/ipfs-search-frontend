@@ -1,11 +1,15 @@
-<ul>
-  {{#each model.hits as |hit|}}
-    <li>
-      <ul>{{{hit.title}}}</ul>
-    </li>
-  {{/each}}
-</ul>
+{{input value=(mut newSearchString)}} <button {{action "updateSearch"}}>Search</button>
 
-We found {{model.total}} results for your search!
+{{#if model}}
+  <ul>
+    {{#each model.hits as |hit|}}
+      <li>
+        {{{hit.title}}}
+      </li>
+    {{/each}}
+  </ul>
+
+  We found {{model.total}} results for your search!
+{{/if}}
 
 {{outlet}}
