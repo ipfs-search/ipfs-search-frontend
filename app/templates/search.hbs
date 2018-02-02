@@ -1,4 +1,4 @@
-{{input value=(mut newSearchString)}} <button {{action "updateSearch"}}>Search</button>
+{{input value=(mut newSearchString) enter=(action "updateSearch")}} <button {{action "updateSearch"}}>Search</button>
 
 {{#if model}}
   <ul>
@@ -9,7 +9,10 @@
     {{/each}}
   </ul>
 
-  We found {{model.total}} results for your search!
+  We found {{model.total}} results in {{model.page_count}} pages for your search!
+
+  {{page-list totalPages=model.page_count currentPage=page}}
 {{/if}}
+
 
 {{outlet}}

@@ -1,0 +1,13 @@
+{{#if totalPages}}
+  {{link-to "first" "search" (query-params page=0)}}
+  {{#each pagesBeforeMe as |page|}}
+    | {{link-to page "search" (query-params page=page)}}
+  {{/each}}
+  | <span class="currentPage">{{currentPage}}</span>
+  {{#each pagesAfterMe as |page|}}
+    | {{link-to page "search" (query-params page=page)}}
+  {{/each}}
+  | {{link-to "last" "search" (query-params page=lastPage)}}
+{{/if}}
+
+{{yield}}

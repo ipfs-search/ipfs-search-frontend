@@ -1,11 +1,15 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  queryParams: [ 'search' ],
+  queryParams: [ 'search', 'page' ],
   search: "",
+  page: 0,
   actions: {
     updateSearch(){
-      this.set('search', this.get('newSearchString'));
+      this.setProperties({
+        search: this.get('newSearchString'),
+        page: 0
+      });
     }
   }
 });

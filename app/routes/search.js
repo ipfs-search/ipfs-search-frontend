@@ -5,15 +5,18 @@ export default Route.extend({
   queryParams: {
     search: {
       refreshModel: true
+    },
+    page: {
+      refreshModel: true
     }
   },
   search: null,
   ajax: inject(),
-  model( { search } ) {
+  model( { search, page } ) {
     if( search ) {
-      return this.get('ajax').request('/v1/search', {
+      return this.get('ajax').request('http://api.ipfs-search.com/v1/search', {
         method: 'GET',
-        data: { search }
+        data: { q: search, page: page }
       }).catch( (err) => {
         window.lasterr = err;
         throw err;
