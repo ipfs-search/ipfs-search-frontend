@@ -4,7 +4,7 @@
   <ul>
     {{#each model.hits as |hit|}}
       <li>
-        {{{hit.title}}}
+        {{search-hit-card hit=hit}}
       </li>
     {{/each}}
   </ul>
