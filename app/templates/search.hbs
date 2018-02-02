@@ -1,0 +1,9 @@
+<ul>
+  {{#each model.hits as |hit|}}
+    <li>
+      <ul>{{{hit.title}}}</ul>
+    </li>
+  {{/each}}
+</ul>
+
+{{outlet}}
