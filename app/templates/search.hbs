@@ -1,10 +1,14 @@
 {{input value=(mut newSearchString) enter=(action "updateSearch")}} <button {{action "updateSearch"}}>Search</button>
 
+<div class="options">
+  {{input type="checkbox" checked=(mut openAllResults)}}Expand results
+</div>
+
 {{#if model}}
   <ul>
     {{#each model.hits as |hit|}}
       <li>
-        {{search-hit-card hit=hit}}
+        {{search-hit-card hit=hit forceExpand=openAllResults}}
       </li>
     {{/each}}
   </ul>
