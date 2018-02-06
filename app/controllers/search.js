@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  queryParams: [ 'search', 'page' ],
+  queryParams: [ 'search', 'page', 'kind' ],
   search: "",
+  kind: "file",
   page: 0,
   actions: {
     updateSearch(){
@@ -10,6 +11,9 @@ export default Controller.extend({
         search: this.get('newSearchString'),
         page: 0
       });
+    },
+    newKind(kind) {
+      this.set('kind', kind);
     }
   }
 });

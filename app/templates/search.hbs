@@ -1,14 +1,43 @@
 {{input value=(mut newSearchString) enter=(action "updateSearch")}} <button {{action "updateSearch"}}>Search</button>
 
 <div class="options">
-  {{input type="checkbox" checked=(mut openAllResults)}}Expand results
+  <div class="option open-all-results">
+    {{input type="checkbox" checked=(mut openAllResults)}}Expand results
+  </div>
+  <div class="option content-type">
+    {{#radio-button
+       value="image"
+       groupValue=kind}}
+      <span>Image</span>
+    {{/radio-button}}
+    {{#radio-button
+       value="text"
+       groupValue=kind}}
+      <span>Text</span>
+    {{/radio-button}}
+    {{#radio-button
+       value="video"
+       groupValue=kind}}
+      <span>Video</span>
+    {{/radio-button}}
+    {{#radio-button
+       value="directory"
+       groupValue=kind}}
+      <span>Directory</span>
+    {{/radio-button}}
+    {{#radio-button
+       value="file"
+       groupValue=kind}}
+      <span>Any file</span>
+    {{/radio-button}}
+  </div>
 </div>
 
 {{#if model}}
   <ul>
     {{#each model.hits as |hit|}}
       <li>
-        {{search-hit-card hit=hit forceExpand=openAllResults}}
+        {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
       </li>
     {{/each}}
   </ul>
