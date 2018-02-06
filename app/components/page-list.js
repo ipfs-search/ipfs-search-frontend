@@ -5,13 +5,12 @@ import { rangeInclusive } from 'ipfs-search/utils/array-helpers';
 const PAGES_AROUND_CURRENT = 3;
 
 export default Component.extend({
-  pagesBeforeMe: computed('totalPages', 'currentPage', function() {
+  pagesBeforeMe: computed('currentPage', function() {
     const currentPage = this.get('currentPage');
     const firstPage = Math.max( currentPage - PAGES_AROUND_CURRENT, 0 );
     return rangeInclusive( firstPage, currentPage - 1 );
   }),
-  pagesAfterMe: computed('totalPages', 'currentPage', function() {
-    const totalPages = this.get('totalPages');
+  pagesAfterMe: computed('lastPage', 'currentPage', function() {
     const lastPage = this.get('lastPage');
     const currentPage = this.get('currentPage');
     const lastShownPage = Math.min( currentPage + PAGES_AROUND_CURRENT, lastPage);
