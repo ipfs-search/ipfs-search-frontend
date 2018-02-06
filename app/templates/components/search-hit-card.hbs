@@ -18,6 +18,9 @@
         {{#if (eq kind "image")}}
           <img src="http://ipfs.io/ipfs/{{hit.hash}}" />
         {{/if}}
+        {{#if (eq kind "video")}}
+          <video src="http://ipfs.io/ipfs/{{hit.hash}}" controls />
+        {{/if}}
       </dl>
     </div>    
   </div>
