@@ -19,7 +19,7 @@
           <img src="http://ipfs.io/ipfs/{{hit.hash}}" />
         {{/if}}
         {{#if (eq kind "video")}}
-          <video src="http://ipfs.io/ipfs/{{hit.hash}}" controls />
+          <video src="http://ipfs.io/ipfs/{{hit.hash}}" controls preload="metadata" />
         {{/if}}
       </dl>
     </div>    
