@@ -29,6 +29,9 @@ export default Route.extend({
         if( kind == "video" ) {
           search += " metadata.Content-Type:video*";
         }
+        if( kind == "audio" ) {
+          search += " metadata.Content-Type:audio*";
+        }
         if( kind == "directory" ) {
           fileOrDirectory = "directory";
         }

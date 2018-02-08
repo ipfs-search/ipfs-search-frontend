@@ -21,6 +21,11 @@
         {{#if (eq kind "video")}}
           <video src="http://ipfs.io/ipfs/{{hit.hash}}" controls preload="metadata" />
         {{/if}}
+        {{#if (eq kind "audio")}}
+          <audio controls="controls">
+            <source src="http://ipfs.io/ipfs/{{hit.hash}}" />
+          </audio>
+        {{/if}}
       </dl>
     </div>    
   </div>
