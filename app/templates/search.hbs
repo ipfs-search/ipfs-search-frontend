@@ -1,56 +1,85 @@
-{{input value=(mut newSearchString) enter=(action "updateSearch")}} <button {{action "updateSearch"}}>Search</button>
+<div class="container">
 
-<div class="options">
-  <div class="option open-all-results">
-    {{input type="checkbox" checked=(mut openAllResults)}}Expand results
+  <div class="input-group">
+    <input type="text" class="form-control" aria-label="Search...">
+    <div class="input-group-append">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  			<span class="sr-only">Toggle Dropdown</span>
+  		</button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <form class="px-4 py-3">
+          <div class="form-group">
+            <label for="inputGroupSelect">Filter on</label>
+            <select class="custom-select" id="inputGroupSelect">
+  		    		<option value="file" selected>Any file</option>
+  		    		<option value="image">Image</option>
+  		    		<option value="text">Text</option>
+  		    		<option value="video">Video</option>
+  						<option value="audio">Audio</option>
+  						<option value="directory">Directory</option>
+  		  		</select>
+          </div>
+        </form>
+      </div>
+      <button type="button" class="btn btn-outline-secondary">Action</button>
+    </div>
   </div>
-  <div class="option content-type">
-    {{#radio-button
-       value="image"
-       groupValue=kind}}
-      <span>Image</span>
-    {{/radio-button}}
-    {{#radio-button
-       value="text"
-       groupValue=kind}}
-      <span>Text</span>
-    {{/radio-button}}
-    {{#radio-button
-       value="video"
-       groupValue=kind}}
-      <span>Video</span>
-    {{/radio-button}}
-    {{#radio-button
-       value="audio"
-       groupValue=kind}}
-      <span>Audio</span>
-    {{/radio-button}}
-    {{#radio-button
-       value="directory"
-       groupValue=kind}}
-      <span>Directory</span>
-    {{/radio-button}}
-    {{#radio-button
-       value="file"
-       groupValue=kind}}
-      <span>Any file</span>
-    {{/radio-button}}
+
+  {{input value=(mut newSearchString) enter=(action "updateSearch")}} <button {{action "updateSearch"}}>Search</button>
+
+  <div class="options">
+    <div class="option open-all-results">
+      {{input type="checkbox" checked=(mut openAllResults)}}Expand results
+    </div>
+    <div class="option content-type">
+      {{#radio-button
+         value="image"
+         groupValue=kind}}
+        <span>Image</span>
+      {{/radio-button}}
+      {{#radio-button
+         value="text"
+         groupValue=kind}}
+        <span>Text</span>
+      {{/radio-button}}
+      {{#radio-button
+         value="video"
+         groupValue=kind}}
+        <span>Video</span>
+      {{/radio-button}}
+      {{#radio-button
+         value="audio"
+         groupValue=kind}}
+        <span>Audio</span>
+      {{/radio-button}}
+      {{#radio-button
+         value="directory"
+         groupValue=kind}}
+        <span>Directory</span>
+      {{/radio-button}}
+      {{#radio-button
+         value="file"
+         groupValue=kind}}
+        <span>Any file</span>
+      {{/radio-button}}
+    </div>
   </div>
+
+  {{#if model}}
+    <ul>
+      {{#each model.hits as |hit|}}
+        <li>
+          {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
+        </li>
+      {{/each}}
+    </ul>
+
+    We found {{model.total}} results in {{model.page_count}} pages for your search!
+
+    {{page-list totalPages=model.page_count currentPage=page}}
+  {{/if}}
+
+
+  {{outlet}}
+
 </div>
-
-{{#if model}}
-  <ul>
-    {{#each model.hits as |hit|}}
-      <li>
-        {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
-      </li>
-    {{/each}}
-  </ul>
-
-  We found {{model.total}} results in {{model.page_count}} pages for your search!
-
-  {{page-list totalPages=model.page_count currentPage=page}}
-{{/if}}
-
-
-{{outlet}}
