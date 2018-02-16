@@ -2,7 +2,7 @@
 {{#if cardOpen}}
   <div class="long-result">
     <span class="less" {{action "showMore" false}}>-</span>
-    <a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
+    <a href="{{gateway}}/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
 
     <div class="extra-result-info">
       <dl>
@@ -16,22 +16,22 @@
           <dt>size</dt><dd>{{hit.size}} bytes</dd>
         {{/if}}
         {{#if (eq kind "image")}}
-          <img src="http://ipfs.io/ipfs/{{hit.hash}}" />
+          <img src="{{gateway}}/ipfs/{{hit.hash}}" />
         {{/if}}
         {{#if (eq kind "video")}}
-          <video src="http://ipfs.io/ipfs/{{hit.hash}}" controls preload="metadata" />
+          <video src="{{gateway}}/ipfs/{{hit.hash}}" controls preload="metadata" />
         {{/if}}
         {{#if (eq kind "audio")}}
           <audio controls="controls">
-            <source src="http://ipfs.io/ipfs/{{hit.hash}}" />
+            <source src="{{gateway}}/ipfs/{{hit.hash}}" />
           </audio>
         {{/if}}
       </dl>
-    </div>    
+    </div>
   </div>
 {{else}}
   <div class="short-result">
     <span class="more" {{action "showMore" true}}>+</span>
-    <a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
+    <a href="{{gateway}}/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
   </div>
 {{/if}}

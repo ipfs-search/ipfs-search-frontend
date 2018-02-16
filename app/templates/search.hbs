@@ -40,16 +40,16 @@
 
 {{#if model}}
   <ul>
-    {{#each model.hits as |hit|}}
+    {{#each model.response.hits as |hit|}}
       <li>
-        {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
+        {{search-hit-card hit=hit gateway=model.gateway forceExpand=openAllResults kind=kind}}
       </li>
     {{/each}}
   </ul>
 
-  We found {{model.total}} results in {{model.page_count}} pages for your search!
+  We found {{model.response.total}} results in {{model.response.page_count}} pages for your search!
 
-  {{page-list totalPages=model.page_count currentPage=page}}
+  {{page-list totalPages=model.response.page_count currentPage=page}}
 {{/if}}
 
 
