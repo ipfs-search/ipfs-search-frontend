@@ -7,7 +7,7 @@
   {{#each pagesAfterMe as |page|}}
     | {{link-to page "search" (query-params page=page)}}
   {{/each}}
-  | {{link-to "last" "search" (query-params page=lastPage)}}
+  <!--  {{!-- link-to "last" "search" (query-params page=lastPage) --}} -->
 {{/if}}
 
 {{yield}}
