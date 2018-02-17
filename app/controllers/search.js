@@ -1,3 +1,4 @@
+import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
@@ -5,6 +6,12 @@ export default Controller.extend({
   search: "",
   kind: "file",
   page: 0,
+
+  searchPlaceholder: computed('kind', function() {
+    const searchKind = this.get('kind');
+    return `Search ${searchKind}`;
+  }),
+
   actions: {
     updateSearch(){
       this.setProperties({
@@ -12,7 +19,7 @@ export default Controller.extend({
         page: 0
       });
     },
-    newKind(kind) {
+    changeKind(kind) {
       this.set('kind', kind);
     }
   }

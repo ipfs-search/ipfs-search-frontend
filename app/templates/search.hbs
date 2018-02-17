@@ -1,68 +1,38 @@
 <div class="container">
 
   <div class="input-group">
-    <input type="text" class="form-control" aria-label="Search...">
-    <div class="input-group-append">
-      <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  			<span class="sr-only">Toggle Dropdown</span>
-  		</button>
-      <div class="dropdown-menu dropdown-menu-right">
-        <form class="px-4 py-3">
-          <div class="form-group">
-            <label for="inputGroupSelect">Filter on</label>
-            <select class="custom-select" id="inputGroupSelect">
-  		    		<option value="file" selected>Any file</option>
-  		    		<option value="image">Image</option>
-  		    		<option value="text">Text</option>
-  		    		<option value="video">Video</option>
-  						<option value="audio">Audio</option>
-  						<option value="directory">Directory</option>
-  		  		</select>
-          </div>
-        </form>
-      </div>
-      <button type="button" class="btn btn-outline-secondary">Action</button>
-    </div>
+    {{input class="form-control" placeholder="Search..." aria-label="search" value=(mut newSearchString) enter=(action "updateSearch")}}
+    {{#bs-dropdown class="input-group-append" as |dd|}}
+      {{#bs-button type="outline-secondary" onClick=(action "updateSearch")}}Action{{/bs-button}}
+
+      {{#dd.button class="btn-outline-secondary dropdown-toggle dropdown-toggle-split"}}
+        <span class="sr-only">Toggle Dropdown</span>
+      {{/dd.button}}
+      {{#dd.menu as |menu|}}
+        {{#menu.item}}
+          <span class="dropdown-item" {{action "changeKind" "file"}}>Any file</span>
+        {{/menu.item}}
+        {{#menu.item}}
+          <span class="dropdown-item" {{action "changeKind" "image"}}>Image</span>
+        {{/menu.item}}
+        {{#menu.item}}
+          <span class="dropdown-item" {{action "changeKind" "text"}}>Text</span>
+        {{/menu.item}}
+        {{#menu.item}}
+          <span class="dropdown-item" {{action "changeKind" "video"}}>Video</span>
+        {{/menu.item}}
+        {{#menu.item}}
+          <span class="dropdown-item" {{action "changeKind" "audio"}}>Audio</span>
+        {{/menu.item}}
+        {{#menu.item}}
+          <span class="dropdown-item" {{action "changeKind" "directory"}}>Directory</span>
+        {{/menu.item}}
+      {{/dd.menu}}
+    {{/bs-dropdown}}
   </div>
 
-  {{input value=(mut newSearchString) enter=(action "updateSearch")}} <button {{action "updateSearch"}}>Search</button>
-
-  <div class="options">
-    <div class="option open-all-results">
-      {{input type="checkbox" checked=(mut openAllResults)}}Expand results
-    </div>
-    <div class="option content-type">
-      {{#radio-button
-         value="image"
-         groupValue=kind}}
-        <span>Image</span>
-      {{/radio-button}}
-      {{#radio-button
-         value="text"
-         groupValue=kind}}
-        <span>Text</span>
-      {{/radio-button}}
-      {{#radio-button
-         value="video"
-         groupValue=kind}}
-        <span>Video</span>
-      {{/radio-button}}
-      {{#radio-button
-         value="audio"
-         groupValue=kind}}
-        <span>Audio</span>
-      {{/radio-button}}
-      {{#radio-button
-         value="directory"
-         groupValue=kind}}
-        <span>Directory</span>
-      {{/radio-button}}
-      {{#radio-button
-         value="file"
-         groupValue=kind}}
-        <span>Any file</span>
-      {{/radio-button}}
-    </div>
+  <div class="option open-all-results">
+    {{input type="checkbox" checked=(mut openAllResults)}}Expand results
   </div>
 
   {{#if model}}
