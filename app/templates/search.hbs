@@ -3,11 +3,6 @@
   <div class="input-group">
     {{input class="form-control" placeholder="Search..." aria-label="search" value=(mut newSearchString) enter=(action "updateSearch")}}
     {{#bs-dropdown class="input-group-append" as |dd|}}
-      {{#bs-button type="outline-secondary" onClick=(action "updateSearch")}}Action{{/bs-button}}
-
-      {{#dd.button class="btn-outline-secondary dropdown-toggle dropdown-toggle-split"}}
-        <span class="sr-only">Toggle Dropdown</span>
-      {{/dd.button}}
       {{#dd.menu as |menu|}}
         {{#menu.item}}
           <span class="dropdown-item" {{action "changeKind" "file"}}>Any file</span>
@@ -28,6 +23,15 @@
           <span class="dropdown-item" {{action "changeKind" "directory"}}>Directory</span>
         {{/menu.item}}
       {{/dd.menu}}
+
+      <div class="btn-group">
+        {{#dd.button class="input-group-append btn-outline-secondary dropdown-toggle dropdown-toggle-split"}}
+          <span class="sr-only">Toggle Dropdown</span>
+        {{/dd.button}}
+
+        {{#bs-button class="input-group-append" type="outline-secondary" onClick=(action "updateSearch")}}Action{{/bs-button}}
+      </div>
+
     {{/bs-dropdown}}
   </div>
 
