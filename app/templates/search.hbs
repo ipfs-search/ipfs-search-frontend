@@ -4,23 +4,23 @@
     {{input class="form-control" placeholder="Search..." aria-label="search" value=(mut newSearchString) enter=(action "updateSearch")}}
     {{#bs-dropdown class="input-group-append" as |dd|}}
       {{#dd.menu as |menu|}}
-        {{#menu.item}}
-          <span class="dropdown-item" {{action "changeKind" "file"}}>Any file</span>
+        {{#menu.item active=(eq kind "file") action=(action "changeKind" "file")}}
+          Any file
         {{/menu.item}}
-        {{#menu.item}}
-          <span class="dropdown-item" {{action "changeKind" "image"}}>Image</span>
+        {{#menu.item active=(eq kind "image") action=(action "changeKind" "image")}}
+          Image
         {{/menu.item}}
-        {{#menu.item}}
-          <span class="dropdown-item" {{action "changeKind" "text"}}>Text</span>
+        {{#menu.item  active=(eq kind "text") action=(action "changeKind" "text")}}
+          Text
         {{/menu.item}}
-        {{#menu.item}}
-          <span class="dropdown-item" {{action "changeKind" "video"}}>Video</span>
+        {{#menu.item active=(eq kind "video") action=(action "changeKind" "video")}}
+          Video
         {{/menu.item}}
-        {{#menu.item}}
-          <span class="dropdown-item" {{action "changeKind" "audio"}}>Audio</span>
+        {{#menu.item active=(eq kind "audio") action=(action "changeKind" "audio")}}
+          Audio
         {{/menu.item}}
-        {{#menu.item}}
-          <span class="dropdown-item" {{action "changeKind" "directory"}}>Directory</span>
+        {{#menu.item active=(eq kind "directory") action=(action "changeKind" "directory")}}
+          Directory
         {{/menu.item}}
       {{/dd.menu}}
 
