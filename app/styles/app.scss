@@ -3,3 +3,46 @@
 .btn-group > .input-group-append:not(:last-child) {
   @include border-right-radius(0);
 }
+
+.search-box-wrapper {
+  z-index:10;
+  position:fixed;
+  width:100%;
+  background-color:#99ffff;
+  height:62px;
+  top:0;
+  left:0;
+  right:0;
+  .search-box {
+    padding-top: 10px;
+    padding-left:15px;
+    padding-right:15px;
+    .input-group {
+      background-color:white;
+    }
+  }
+}
+
+.search-results {
+  position:absolute;
+  padding-top:62px;
+  left:0;
+  right:0;
+  padding-bottom: 62px;
+}
+
+.search-footer-wrapper {
+  position:fixed;
+  background-color:#99ffff;
+  bottom:0;
+  left:0;
+  right:0;
+  .search-footer {
+    padding-bottom:5px;
+    padding-top:10px;
+    .rpio {
+      padding-top:5px;
+      font-size: 75%;
+    }
+  }
+}
