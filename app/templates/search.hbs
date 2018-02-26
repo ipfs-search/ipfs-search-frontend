@@ -1,59 +1,91 @@
-<div class="container">
+<!--  Component search-box-->
+<div class="search-box-wrapper">
+  <div class="container search-box">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
 
-  <div class="input-group">
-    {{input class="form-control" placeholder="Search..." aria-label="search" value=(mut newSearchString) enter=(action "updateSearch")}}
-    {{#bs-dropdown class="input-group-append" as |dd|}}
-      {{#dd.menu as |menu|}}
-        {{#menu.item active=(eq kind "file") action=(action "changeKind" "file")}}
-          Any file
-        {{/menu.item}}
-        {{#menu.item active=(eq kind "image") action=(action "changeKind" "image")}}
-          Image
-        {{/menu.item}}
-        {{#menu.item  active=(eq kind "text") action=(action "changeKind" "text")}}
-          Text
-        {{/menu.item}}
-        {{#menu.item active=(eq kind "video") action=(action "changeKind" "video")}}
-          Video
-        {{/menu.item}}
-        {{#menu.item active=(eq kind "audio") action=(action "changeKind" "audio")}}
-          Audio
-        {{/menu.item}}
-        {{#menu.item active=(eq kind "directory") action=(action "changeKind" "directory")}}
-          Directory
-        {{/menu.item}}
-      {{/dd.menu}}
+        <div class="input-group">
+          <!-- {{input class="form-control" placeholder="Search..." aria-label="search" value=(mut newSearchString) enter=(action "updateSearch")}} -->
+          {{input class="form-control" placeholder=searchPlaceholder aria-label="Search" value=(mut newSearchString) enter=(action "updateSearch")}}
+          {{#bs-dropdown class="input-group-append" as |dd|}}
+            {{#dd.menu as |menu|}}
+              {{#menu.item active=(eq kind "file") action=(action "changeKind" "file")}}
+                Any file
+              {{/menu.item}}
+              {{#menu.item active=(eq kind "image") action=(action "changeKind" "image")}}
+                Image
+              {{/menu.item}}
+              {{#menu.item  active=(eq kind "text") action=(action "changeKind" "text")}}
+                Text
+              {{/menu.item}}
+              {{#menu.item active=(eq kind "video") action=(action "changeKind" "video")}}
+                Video
+              {{/menu.item}}
+              {{#menu.item active=(eq kind "audio") action=(action "changeKind" "audio")}}
+                Audio
+              {{/menu.item}}
+              {{#menu.item active=(eq kind "directory") action=(action "changeKind" "directory")}}
+                Directory
+              {{/menu.item}}
+            {{/dd.menu}}
 
-      <div class="btn-group">
-        {{#dd.button class="input-group-append btn-outline-secondary dropdown-toggle dropdown-toggle-split"}}
-          <span class="sr-only">Toggle Dropdown</span>
-        {{/dd.button}}
+            <div class="btn-group">
+              {{#dd.button class="input-group-append btn-outline-secondary dropdown-toggle dropdown-toggle-split"}}
+                <span class="sr-only">Toggle Dropdown</span>
+              {{/dd.button}}
 
-        {{#bs-button class="input-group-append" type="outline-secondary" onClick=(action "updateSearch")}}Action{{/bs-button}}
+              {{#bs-button class="input-group-append" type="outline-secondary" onClick=(action "updateSearch")}}Action{{/bs-button}}
+            </div>
+
+          {{/bs-dropdown}}
+        </div>
+
       </div>
+    </div>
+  </div>
+</div>
 
-    {{/bs-dropdown}}
+
+
+<!-- Component searh-results -->
+
+<div class="container search-results">
+
+  <div class="row">
+    <div class="option open-all-results form-check">
+      {{input class="form-check-input" type="checkbox" checked=(mut openAllResults)}}
+      <label class="form-check-label" for="defaultCheck1">
+        Expand results
+      </label>
+    </div>
   </div>
 
-  <div class="option open-all-results">
-    {{input type="checkbox" checked=(mut openAllResults)}}Expand results
+  <div class="row">
+    {{#if model}}
+      <ul class="list-unstyled">
+        {{#each model.hits as |hit|}}
+          <li>
+            {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
   </div>
 
-  {{#if model}}
-    <ul>
-      {{#each model.hits as |hit|}}
-        <li>
-          {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
-        </li>
-      {{/each}}
-    </ul>
-
-    We found {{model.total}} results in {{model.page_count}} pages for your search!
-
-    {{page-list totalPages=model.page_count currentPage=page}}
-  {{/if}}
-
-
-  {{outlet}}
+  <div class="row">
+    <!-- {{#if model}} -->
+        <!-- We found {{model.total}} results in {{model.page_count}} pages for your search!&nbsp;{{page-list totalPages=model.page_count currentPage=page}} -->
+    <!-- {{/if}} -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
 
 </div>
+{{outlet}}
