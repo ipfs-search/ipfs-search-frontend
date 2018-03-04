@@ -1,44 +1,23 @@
 {{search-input search=search kind=kind onSearch=(action "updateSearch")}}
 
-<!-- Component searh-results -->
+<!-- Component search-results -->
+<div class="search-results">
+  {{search-results results=model kind=kind}}
 
-<div class="container search-results">
-
-  <div class="row">
-    <div class="option open-all-results form-check">
-      {{input class="form-check-input" type="checkbox" checked=(mut openAllResults)}}
-      <label class="form-check-label" for="defaultCheck1">
-        Expand results
-      </label>
+  <div class="container pagination">
+    <div class="row">
+      <!-- {{#if model}} -->
+      <!-- We found {{model.total}} model in {{model.page_count}} pages for your search!&nbsp;{{page-list totalPages=model.page_count currentPage=page}} -->
+      <!-- {{/if}} -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
-
-  <div class="row">
-    {{#if model}}
-      <ul class="list-unstyled">
-        {{#each model.hits as |hit|}}
-          <li>
-            {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
-          </li>
-        {{/each}}
-      </ul>
-    {{/if}}
-  </div>
-
-  <div class="row">
-    <!-- {{#if model}} -->
-        <!-- We found {{model.total}} results in {{model.page_count}} pages for your search!&nbsp;{{page-list totalPages=model.page_count currentPage=page}} -->
-    <!-- {{/if}} -->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
-    </nav>
-  </div>
-
 </div>
-{{outlet}}
