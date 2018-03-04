@@ -15,6 +15,12 @@ export default Route.extend({
   },
   search: null,
   ajax: inject(),
+  activePageService: inject(),
+
+  activate() {
+    this.get('activePageService').set('page', 'search-page');
+  },
+
   model( { search, page, kind } ) {
     if( search || kind ) {
       if( ! search ) { search = ""; }
