@@ -4,6 +4,12 @@
 .page-link.current-page, .page-link.has-more-pages {
   color: black;
 }
+
+.search-box-wrapper {
+  img {
+    max-height: 45px;
+  }
+}
 // END to be designed
 
 .btn-group > .input-group-append:not(:last-child) {

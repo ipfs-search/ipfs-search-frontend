@@ -1,10 +1,27 @@
-{{search-input search=search kind=kind onSearch=(action "updateSearch")}}
+<div class="search">
+  <div class="search-box-wrapper">
+    <div class="container search-box">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <img src="/img/logo-ipfs-search.svg" />
+        </div>
 
-<!-- Component search-results -->
-<div class="search-results">
-  {{search-results results=model kind=kind}}
+        <div class="col-md-8">
+          {{search-input/raw-search onSearch=(action "updateSearch")}}
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="container pagination">
-    {{page-list totalPages=model.page_count currentPage=page}}
+
+
+  <!-- Component search-results -->
+  <div class="search-results">
+    {{search-results results=model kind=kind}}
+
+    <div class="container pagination">
+      {{page-list totalPages=model.page_count currentPage=page}}
+    </div>
   </div>
 </div>
+
