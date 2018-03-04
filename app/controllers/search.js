@@ -13,14 +13,8 @@ export default Controller.extend({
   }),
 
   actions: {
-    updateSearch(){
-      this.setProperties({
-        search: this.get('newSearchString'),
-        page: 0
-      });
-    },
-    changeKind(kind) {
-      this.set('kind', kind);
+    updateSearch( { search, kind } ){
+      this.setProperties({ search, kind, page: 0 });
     }
   }
 });
