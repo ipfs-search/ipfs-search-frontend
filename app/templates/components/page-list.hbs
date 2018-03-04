@@ -1,13 +1,23 @@
-{{#if totalPages}}
-  {{link-to "first" "search" (query-params page=0)}}
-  {{#each pagesBeforeMe as |page|}}
-    | {{link-to page "search" (query-params page=page)}}
-  {{/each}}
-  | <span class="currentPage">{{currentPage}}</span>
-  {{#each pagesAfterMe as |page|}}
-    | {{link-to page "search" (query-params page=page)}}
-  {{/each}}
-  <!--  {{!-- link-to "last" "search" (query-params page=lastPage) --}} -->
-{{/if}}
-
-{{yield}}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {{#if totalPages}}
+      {{#if (not isFirstPage)}}
+        <li class="page-item">{{link-to "First" "search" (query-params page=0) class="page-link"}}</li>
+      {{/if}}
+      {{#each pagesBeforeMe as |page|}}
+        <li class="page-item">{{link-to page "search" (query-params page=page) class="page-link"}}</li>
+      {{/each}}
+      {{#if isFirstPage}}
+        <li class="page-item"><span class="page-link current-page">First</span></li>
+      {{else}}
+        <li class="page-item"><span class="page-link current-page">{{currentPage}}</span></li>
+      {{/if}}
+      {{#each pagesAfterMe as |page|}}
+        <li class="page-item">{{link-to page "search" (query-params page=page) class="page-link"}}</li>
+      {{/each}}
+      {{#if hasMorePages}}
+        <li class="page-item"><span class="page-link has-more-pages">...</span></li>
+      {{/if}}
+    {{/if}}
+  </ul>
+</nav>

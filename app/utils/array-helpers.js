@@ -5,7 +5,7 @@
  */
 function rangeInclusive( start, end ){
   const resultList = [];
-  if( ! end > start )
+  if( ! (end >= start) )
     return resultList;
 
   for (let i = start; i <= end; i++) {

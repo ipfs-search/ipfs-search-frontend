@@ -1,5 +1,11 @@
 @import "ember-bootstrap/bootstrap";
 
+// START to de desigend
+.page-link.current-page, .page-link.has-more-pages {
+  color: black;
+}
+// END to be designed
+
 .btn-group > .input-group-append:not(:last-child) {
   @include border-right-radius(0);
 }
