@@ -1,0 +1,8 @@
+<!-- Component search-results -->
+<div class="search-results">
+  {{search-results results=model kind=kind}}
+
+  <div class="container pagination">
+    {{page-list totalPages=model.page_count currentPage=page}}
+  </div>
+</div>

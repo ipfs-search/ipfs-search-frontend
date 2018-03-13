@@ -7,21 +7,13 @@
         </div>
 
         <div class="col-md-8">
-          {{search-input/raw-search onSearch=(action "updateSearch")}}
+          {{search-input/raw-search kind=kind search=search onSearch=(action "updateSearch")}}
         </div>
       </div>
     </div>
   </div>
 
-
-
-  <!-- Component search-results -->
-  <div class="search-results">
-    {{search-results results=model kind=kind}}
-
-    <div class="container pagination">
-      {{page-list totalPages=model.page_count currentPage=page}}
-    </div>
+  <div class="results-wrapper">
+    {{liquid-outlet}}
   </div>
 </div>
-

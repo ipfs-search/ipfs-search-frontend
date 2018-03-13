@@ -1,20 +1,15 @@
-import { computed } from '@ember/object';
 import Controller from '@ember/controller';
+import { inject } from '@ember/service';
 
 export default Controller.extend({
-  queryParams: [ 'search', 'page', 'kind' ],
-  search: "",
-  kind: "file",
-  page: 0,
-
-  searchPlaceholder: computed('kind', function() {
-    const searchKind = this.get('kind');
-    return `Search ${searchKind}`;
-  }),
-
+  activePageService: inject(),
+  kind: 'any',
   actions: {
-    updateSearch( { search, kind } ){
-      this.setProperties({ search, kind, page: 0 });
+    updateSearch( { kind, search } ){
+      this.setProperties( {kind, search} );
+      this.transitionToRoute('search.results', { kind, search, page: 0 });
+      // proactively set the target
+      this.get('activePageService').set('page', 'search-page search-transition-to-results');
     }
   }
 });
