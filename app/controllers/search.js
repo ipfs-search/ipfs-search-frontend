@@ -55,9 +55,15 @@ export default Controller.extend({
   
   actions: {
     updateSearch( { kind, search } ){
+      this.setProperties( { kind, search } );
       this.get('searchRepo').perform( { kind, search, page: 0 });
       // // proactively set the target
       // this.get('activePageService').set('page', 'search-page search-transition-to-results');
+    },
+    setPage( page ) {
+      console.log('setting page');
+      this.setProperties( { page } );
+      this.get('searchRepo').perform( { kind: this.get('kind'), search: this.get('search'), page } );
     }
   }
 });

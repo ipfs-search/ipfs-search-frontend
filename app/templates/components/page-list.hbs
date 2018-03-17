@@ -2,10 +2,10 @@
   <ul class="pagination">
     {{#if totalPages}}
       {{#if (not isFirstPage)}}
-        <li class="page-item">{{link-to "First" "search" (query-params page=0) class="page-link"}}</li>
+        <li class="page-item" {{action "selectPage" 0}}><span class="page-link">First</span></li>
       {{/if}}
       {{#each pagesBeforeMe as |page|}}
-        <li class="page-item">{{link-to page "search" (query-params page=page) class="page-link"}}</li>
+        <li class="page-item"><span class="page-link" {{action "selectPage" page}}>{{page}}</span></li>
       {{/each}}
       {{#if isFirstPage}}
         <li class="page-item"><span class="page-link current-page">First</span></li>
@@ -13,7 +13,7 @@
         <li class="page-item"><span class="page-link current-page">{{currentPage}}</span></li>
       {{/if}}
       {{#each pagesAfterMe as |page|}}
-        <li class="page-item">{{link-to page "search" (query-params page=page) class="page-link"}}</li>
+        <li class="page-item"><span class="page-link" {{action "selectPage" page}}>{{page}}</span></li>
       {{/each}}
       {{#if hasMorePages}}
         <li class="page-item"><span class="page-link has-more-pages">...</span></li>

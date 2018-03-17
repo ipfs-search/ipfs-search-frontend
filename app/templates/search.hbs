@@ -21,7 +21,7 @@
         {{search-results results=data kind=kind}}
 
         <div class="container pagination">
-          {{page-list totalPages=data.page_count currentPage=data.page}}
+          {{page-list totalPages=data.page_count currentPage=data.page on-change=(action "setPage")}}
         </div>
       </div>
     {{/if}}
