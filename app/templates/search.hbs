@@ -14,6 +14,16 @@
   </div>
 
   <div class="results-wrapper">
-    {{liquid-outlet}}
+    {{#if searchRepo.isRunning}}
+      loading
+    {{else}}
+      <div class="search-results">
+        {{search-results results=data kind=kind}}
+
+        <div class="container pagination">
+          {{page-list totalPages=data.page_count currentPage=data.page}}
+        </div>
+      </div>
+    {{/if}}
   </div>
 </div>
