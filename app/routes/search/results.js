@@ -4,12 +4,21 @@ import Route from '@ember/routing/route';
 export default Route.extend({
   ajax: inject(),
   activePageService: inject(),
+  searchState: inject(),
+
+  queryParams: {
+    search: { refreshModel: true },
+    kind: { refreshModel: true },
+    page: { refreshModel: true }
+  },
 
   activate() {
     this.get('activePageService').set('page', 'search-page search-results');
   },
 
-  model( { search, kind, page } ) {
+  model( { kind, page, search } ) {
+    console.log('Reloading model');
+
     if( search || kind ) {
       if( ! search ) { search = ""; }
       let fileOrDirectory = "file";

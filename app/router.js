@@ -8,7 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('search', function() {
-    this.route('results', { path: ":kind/:search/:page" } );
+    this.route('results');
   });
 });
 
