@@ -3,6 +3,17 @@ import { computed } from '@ember/object';
 import Component from '@ember/component';
 
 export default Component.extend({
+  tagName: '',
+
+  searchKindLabel: computed('kind', function() {
+    const kind = this.get('kind');
+    if( kind == "any" ) {
+      return "Filter";
+    } else {
+      return kind || "Filter";
+    }
+  }),
+
   searchPlaceholder: computed('kind', function() {
     const searchKind = this.get('kind');
     return `Search ${searchKind}`;

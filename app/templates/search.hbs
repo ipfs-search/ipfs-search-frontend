@@ -1,29 +1,35 @@
-<div class="search">
-  <div class="search-box-wrapper">
-    <div class="container search-box">
-      <div class="row align-items-center">
-        <div class="col-md-4">
-          <img src="/img/logo-ipfs-search.svg" />
-        </div>
+<div class="header-wrapper">
+  <div class="container">
 
-        <div class="col-md-8">
-          {{search-input/raw-search kind=kind search=search onSearch=(action "updateSearch")}}
-        </div>
+    <div class="row identity d-flex justify-content-center">
+      <div class="col identity-wrapper">
+        <h1 class="d-flex justify-content-center">
+          <a href="http://ipfssearch.com">
+            <img src="assets/logo_white_bright.svg" alt="IPFS Search" />
+          </a>
+        </h1>
       </div>
     </div>
-  </div>
 
-  <div class="results-wrapper">
-    {{#if searchRepo.isRunning}}
-      loading
-    {{else}}
-      <div class="search-results">
-        {{search-results results=data kind=kind}}
-
-        <div class="container pagination">
-          {{page-list totalPages=data.page_count currentPage=data.page on-change=(action "setPage")}}
-        </div>
+    <div class="row search-bar">
+      <div class="col d-flex justify-content-center">
+        {{search-input/raw-search kind=kind search=search onSearch=(action "updateSearch")}}
       </div>
-    {{/if}}
+    </div>
+
   </div>
+</div>
+
+<div class="results-wrapper">
+  {{#if searchRepo.isRunning}}
+    loading
+  {{else}}
+    <div class="search-results">
+      {{search-results results=data kind=kind}}
+
+      <div class="container pagination">
+        {{page-list totalPages=data.page_count currentPage=data.page on-change=(action "setPage")}}
+      </div>
+    </div>
+  {{/if}}
 </div>

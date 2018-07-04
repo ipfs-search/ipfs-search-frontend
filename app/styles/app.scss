@@ -57,3 +57,198 @@
     }
   }
 }
+
+
+@import "includes/fontawesome";
+@import "includes/fa-solid";
+@import "includes/glyphicons";
+@import "includes/colors";
+@import "includes/helpers";
+
+.header-wrapper {
+  z-index: 1;
+  position:fixed;
+  top:0px;
+  left:0;
+  right:0;
+  height:50vh;
+  background-image: url("../assets/background-02.png");
+  background-color: $dark-color;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  transition: top 0.1s ease-in-out;
+  .container {
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    .identity {
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:58px;
+      h1 {
+        a {
+          img {
+            width:388px;
+          }
+        }
+      }
+    }
+    .search-bar {
+      position:absolute;
+      bottom:0;
+      left:0;
+      right:0;
+      margin-bottom: 15px;
+      .glyphicons-search {
+        position: absolute;
+        font-size:28px;
+        color: darken( $white-color, 30% );
+        left:-3px;
+        top:0;
+      }
+    }
+  }
+}
+
+.results-wrapper {
+  overflow-x: hidden;
+  transition: margin-top 0.1s ease-in-out;
+  z-index: 0;
+  position:relative;
+  .container {
+    .form-check {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    .pagination {
+      .page-link {
+        color: #495057;
+      }
+    }
+  }
+}
+
+.footer-wrapper {
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  .container {
+    margin-top: 15px;
+    .links {
+      margin-bottom: 5px;
+    }
+    .rpio {
+      font-size: 80%;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+// What happens if we have results
+body.active {
+  .header-wrapper {
+    background-image: none;
+    height:132px;
+    .container {
+      .identity {
+        top:15px;
+        .identity-wrapper {
+          h1 {
+            a {
+              img {
+                width:288px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .results-wrapper {
+    margin-top: 132px;
+  }
+  .footer-wrapper {
+    position:relative;
+  }
+}
+
+// Small devices (landscape phones, 576px and less)
+@media (max-width: 576px) {
+  .header-wrapper {
+    background-size: 1024px;
+    top:0px;
+    .container {
+      .identity {
+        top:15px;
+        h1 {
+          a {
+            img {
+              width:288px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .results-wrapper {
+    margin-top: 200px;
+    .container {
+      .list-group {
+        .list-group-item:first-child {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+        .list-group-item:last-child {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+      }
+      .results-header {
+        margin-right: 15px;
+      }
+      .pagination {
+        margin-right: 15px;
+      }
+    }
+  }
+  body.active {
+    .header-wrapper {
+      height:200px;
+      top:-133px;
+    }
+    .results-wrapper {
+      margin-top: 67px;
+      .container {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.modal {
+  .modal-dialog {
+    margin-top: 0;
+    margin-bottom:0;
+    .modal-content {
+      height:100vh;
+      border-radius: 0;
+      border: 0;
+      .modal-header {
+        border-bottom: none;
+      }
+      .modal-body {
+        padding-top:0;
+        margin-bottom:0;
+        background-color: white;
+        p {
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+}

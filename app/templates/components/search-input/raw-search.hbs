@@ -1,34 +1,38 @@
-<div class="input-group">
-  {{input class="form-control" placeholder=searchPlaceholder aria-label="Search" value=(mut newSearchString) enter=(action "updateSearch")}}
+<div class="col-md-8 col-lg-8 input-group">
+
+  {{input class="form-control" placeholder="Search..." aria-label="Search" value=(mut newSearchString) enter=(action "updateSearch")}}
+
   {{#bs-dropdown class="input-group-append" as |dd|}}
-    {{#dd.menu as |menu|}}
-      {{#menu.item active=(eq newSearchKind "file") action=(action "changeKind" "file")}}
-        Any file
-      {{/menu.item}}
-      {{#menu.item active=(eq newSearchKind "image") action=(action "changeKind" "image")}}
-        Image
-      {{/menu.item}}
-      {{#menu.item  active=(eq newSearchKind "text") action=(action "changeKind" "text")}}
-        Text
-      {{/menu.item}}
-      {{#menu.item active=(eq newSearchKind "video") action=(action "changeKind" "video")}}
-        Video
-      {{/menu.item}}
-      {{#menu.item active=(eq newSearchKind "audio") action=(action "changeKind" "audio")}}
-        Audio
-      {{/menu.item}}
-      {{#menu.item active=(eq newSearchKind "directory") action=(action "changeKind" "directory")}}
-        Directory
-      {{/menu.item}}
-    {{/dd.menu}}
+    {{#dd.button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}{{searchKindLabel}}
+      <span class="sr-only">Toggle Dropdown</span>
+    {{/dd.button}}
 
-    <div class="btn-group">
-      {{#dd.button class="input-group-append btn-outline-secondary dropdown-toggle dropdown-toggle-split"}}
-        <span class="sr-only">Toggle Dropdown</span>
-      {{/dd.button}}
+    <div class="input-group-append">
+      {{#dd.menu class="dropdown-menu dropdown-menu-right" as |menu|}}
+        {{#menu.item active=(eq newSearchKind "file") action=(action "changeKind" "file")}}
+          Any file
+        {{/menu.item}}
+        {{#menu.item active=(eq newSearchKind "image") action=(action "changeKind" "image")}}
+          Image
+        {{/menu.item}}
+        {{#menu.item  active=(eq newSearchKind "text") action=(action "changeKind" "text")}}
+          Text
+        {{/menu.item}}
+        {{#menu.item active=(eq newSearchKind "video") action=(action "changeKind" "video")}}
+          Video
+        {{/menu.item}}
+        {{#menu.item active=(eq newSearchKind "audio") action=(action "changeKind" "audio")}}
+          Audio
+        {{/menu.item}}
+        {{#menu.item active=(eq newSearchKind "directory") action=(action "changeKind" "directory")}}
+          Directory
+        {{/menu.item}}
+      {{/dd.menu}}
 
-      {{#bs-button class="input-group-append" type="outline-secondary" onClick=(action "updateSearch")}}Action{{/bs-button}}
+      <button class="btn btn-outline-secondary search-button" onClick={{action "updateSearch"}} type="button">
+        <span class="glyphicons glyphicons-search"></span>
+      </button>
+
     </div>
-
   {{/bs-dropdown}}
 </div>
