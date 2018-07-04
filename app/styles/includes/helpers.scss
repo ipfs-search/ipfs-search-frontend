@@ -1,0 +1,38 @@
+// weird bootstrap behaviour
+body {
+  overflow-x: hidden;
+}
+
+// remove ugly blue around input
+input[type="text"], textarea, .list-group-item {
+  outline: none;
+  box-shadow:none !important;
+  border:1px solid #ccc !important;
+}
+
+.modal-header button {
+  outline: none;
+  box-shadow:none !important;
+}
+
+// remove ugly blue around button
+.btn:focus, .btn:active {
+   outline: none !important;
+   box-shadow: none;
+}
+
+// remove transparent color from dropdown menu button
+.btn-outline-secondary, .dropdown {
+  background-color: none !important;
+  background-color: white;
+}
+
+.btn.btn-outline-secondary.search-button {
+  background-color: transparent !important;
+  border:0;
+  width:30px;
+}
+
+.btn-outline-secondary {
+  border-color: #ccc;
+}
