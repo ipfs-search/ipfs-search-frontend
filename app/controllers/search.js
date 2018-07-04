@@ -45,7 +45,7 @@ export default Controller.extend({
         data.kind = kind;
         data.search = search;
         data.page = page;
-        // this.get('activePageService').set('page', 'search-page search-results');
+        this.get('activePageService').set('page', 'search-page search-results');
         this.set('data', data);
       });
     } else {

@@ -216,7 +216,7 @@ body.active {
       }
     }
   }
-  body.active {
+  .search-page.search-results {
     .header-wrapper {
       height:200px;
       top:-133px;
@@ -250,5 +250,35 @@ body.active {
         }
       }
     }
+  }
+}
+
+
+
+// What happens if we have results
+.search-page.search-results {
+  .header-wrapper {
+    background-image: none;
+    height:132px;
+    .container {
+      .identity {
+        top:15px;
+        .identity-wrapper {
+          h1 {
+            a {
+              img {
+                width:288px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .results-wrapper {
+    margin-top: 132px;
+  }
+  .footer-wrapper {
+    position:relative;
   }
 }
