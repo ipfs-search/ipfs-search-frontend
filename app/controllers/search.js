@@ -35,7 +35,7 @@ export default Controller.extend({
         }
       }
 
-      yield this.get('ajax').request('http://api.ipfs-search.com/v1/search', {
+      yield this.get('ajax').request('https://api.ipfs-search.com/v1/search', {
         method: 'GET',
         data: { q: search, page: page, _type: fileOrDirectory }
       }).catch( (err) => {
