@@ -19,7 +19,7 @@ export default Component.extend({
   isFirstPage: computed('currentPage', function() {
     return this.get('currentPage') == 0;
   }),
-  hasMorepages: computed('lastPage', 'currentPage', function() {
+  hasMorePages: computed('lastPage', 'currentPage', function() {
     const lastPage = this.get('lastPage');
     const currentPage = this.get('currentPage');
 

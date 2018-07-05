@@ -150,7 +150,7 @@
 }
 
 // What happens if we have results
-body.active {
+.search-page.search-results {
   .header-wrapper {
     background-image: none;
     height:132px;
@@ -252,8 +252,6 @@ body.active {
     }
   }
 }
-
-
 
 // What happens if we have results
 .search-page.search-results {

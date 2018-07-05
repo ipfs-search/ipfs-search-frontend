@@ -1,13 +1,11 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
+<div class="row">
+  <div class="col">
 
-      <div class="list-group">
-        {{#each results.hits as |hit|}}
-          {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
-        {{/each}}
-      </div>
-
+    <div class="list-group">
+      {{#each results.hits as |hit|}}
+        {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
+      {{/each}}
     </div>
+
   </div>
 </div>
