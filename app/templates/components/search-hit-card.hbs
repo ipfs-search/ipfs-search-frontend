@@ -1,37 +1,56 @@
-
-{{#if cardOpen}}
-  <div class="long-result">
-    <span class="less" {{action "showMore" false}}>-</span>
-    <a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
-
-    <div class="extra-result-info">
-      <dl>
-        <dt>hash</dt><dd>{{hit.hash}}</dd>
-        <dt>title</dt><dd>{{{hit.title}}}</dd>
-        {{#if hit.description}}
-          <dt>description</dt><dd>{{{hit.description}}}</dd>
-        {{/if}}
-        <dt>type</dt><dd>{{hit.type}}</dd>
-        {{#if hit.size}}
-          <dt>size</dt><dd>{{hit.size}} bytes</dd>
-        {{/if}}
-        {{#if (eq kind "image")}}
-          <img src="http://ipfs.io/ipfs/{{hit.hash}}" />
-        {{/if}}
-        {{#if (eq kind "video")}}
-          <video src="http://ipfs.io/ipfs/{{hit.hash}}" controls preload="metadata" />
-        {{/if}}
-        {{#if (eq kind "audio")}}
-          <audio controls="controls">
-            <source src="http://ipfs.io/ipfs/{{hit.hash}}" />
-          </audio>
-        {{/if}}
-      </dl>
-    </div>    
+<div {{action "openModal"}} class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="modal">
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">{{{hit.title}}}</h5>
+    <small class="text-muted"><i class="fas fa-volume-up"></i></small>
   </div>
-{{else}}
-  <div class="short-result">
-    <span class="more" {{action "showMore" true}}>+</span>
-    <a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.title}}}</a>
-  </div>
-{{/if}}
+  <p class="mb-1">{{{hit.description}}}</p>
+  <small><a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a> - {{hit.size}}bytes</small>
+</div>
+
+{{#bs-modal class="modal fade bd-result-modal-lg" size="lg" open=openModal onSubmit=(action (mut openModal)) onHidden=(action (mut openModal) false) as |modal|}}
+  {{#modal.header}}
+    <h5 class="modal-title">
+      {{{hit.title}}}
+      <div class="badge">2</div>
+    </h5>
+  {{/modal.header}}
+  {{#modal.body}}
+    <p>{{{hit.description}}}</p>
+
+    <dl class="row mt-3">
+      {{#if hit.size}}
+        <dt class="col-sm-3">
+          Size
+        </dt>
+        <dd class="col-sm-9">
+          {{hit.size}}bytes
+        </dd>
+      {{/if}}
+      <dt class="col-sm-3">
+        Direct link
+      </dt>
+      <dd class="col-sm-9">
+        <a href="https://ipfs.io/ipfs/{{hit.hash}}">{{hit.hash}}</a>
+      </dd>
+    </dl>
+
+    {{#if (eq kind "image")}}
+      <div class="embed-responsive">
+        <img src="http://ipfs.io/ipfs/{{hit.hash}}" />
+      </div>
+    {{/if}}
+    {{#if (eq kind "video")}}
+      <div class="embed-responsive embed-responsive-16by9">
+        <video class="embed-responsive-item" src="http://ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata"></video>
+      </div>
+      <video src= controls preload="metadata" />
+    {{/if}}
+    {{#if (eq kind "audio")}}
+      <div class="embed-responsive">
+        <audio controls="controls">
+          <source src="http://ipfs.io/ipfs/{{hit.hash}}">
+        </audio>
+      </div>
+    {{/if}}
+  {{/modal.body}}
+{{/bs-modal}}

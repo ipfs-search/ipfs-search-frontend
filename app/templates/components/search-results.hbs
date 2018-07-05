@@ -1,22 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="option open-all-results form-check">
-      {{input class="form-check-input" type="checkbox" checked=(mut openAllResults)}}
-      <label class="form-check-label" for="defaultCheck1">
-        Expand results
-      </label>
+    <div class="col">
+
+      <div class="list-group">
+        {{#each results.hits as |hit|}}
+          {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
+        {{/each}}
+      </div>
+
     </div>
   </div>
-
-  {{#if results}}
-    <div class="row">
-      <ul class="list-unstyled">
-        {{#each results.hits as |hit|}}
-          <li>
-            {{search-hit-card hit=hit forceExpand=openAllResults kind=kind}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-  {{/if}}
 </div>
