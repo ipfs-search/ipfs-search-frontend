@@ -36,19 +36,19 @@
 
     {{#if (eq kind "image")}}
       <div class="embed-responsive">
-        <img src="http://ipfs.io/ipfs/{{hit.hash}}" />
+        <img src="https://ipfs.io/ipfs/{{hit.hash}}" />
       </div>
     {{/if}}
     {{#if (eq kind "video")}}
       <div class="embed-responsive embed-responsive-16by9">
-        <video class="embed-responsive-item" src="http://ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata"></video>
+        <video class="embed-responsive-item" src="https://ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata"></video>
       </div>
       <video src= controls preload="metadata" />
     {{/if}}
     {{#if (eq kind "audio")}}
       <div class="embed-responsive">
         <audio controls="controls">
-          <source src="http://ipfs.io/ipfs/{{hit.hash}}">
+          <source src="https://ipfs.io/ipfs/{{hit.hash}}">
         </audio>
       </div>
     {{/if}}
