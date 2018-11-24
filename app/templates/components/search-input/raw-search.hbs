@@ -3,7 +3,8 @@
   {{input class="form-control" placeholder="Search..." aria-label="Search" value=(mut newSearchString) enter=(action "updateSearch")}}
 
   {{#bs-dropdown class="input-group-append" as |dd|}}
-    {{#dd.button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}{{searchKindLabel}}
+    {{#dd.button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
+      {{searchKindLabel}}
       <span class="sr-only">Toggle Dropdown</span>
     {{/dd.button}}
 

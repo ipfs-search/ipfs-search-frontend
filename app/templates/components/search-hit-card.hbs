@@ -1,3 +1,4 @@
+{{! template-lint-disable no-triple-curlies }}
 <div {{action "openModal"}} class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="modal">
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">{{{hit.title}}}</h5>
@@ -36,14 +37,14 @@
 
     {{#if (eq kind "image")}}
       <div class="embed-responsive">
-        <img src="https://ipfs.io/ipfs/{{hit.hash}}" />
+        <img src="https://ipfs.io/ipfs/{{hit.hash}}" alt="Preview of found image" />
       </div>
     {{/if}}
     {{#if (eq kind "video")}}
       <div class="embed-responsive embed-responsive-16by9">
-        <video class="embed-responsive-item" src="https://ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata"></video>
+        <video class="embed-responsive-item" src="https://ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata" />
       </div>
-      <video src= controls preload="metadata" />
+      <video src="controls" preload="metadata" />
     {{/if}}
     {{#if (eq kind "audio")}}
       <div class="embed-responsive">
