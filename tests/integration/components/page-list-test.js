@@ -12,7 +12,7 @@ module('Integration | Component | page list', function(hooks) {
 
     await render(hbs`{{page-list}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | page list', function(hooks) {
       {{/page-list}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });
