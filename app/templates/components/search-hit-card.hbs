@@ -2,10 +2,10 @@
 <div {{action "openModal"}} class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="modal">
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">{{{hit.title}}}</h5>
-    <small class="text-muted"><i class="fas fa-volume-up"></i></small>
+    <small class={{availabilityClass}}><span class="d-none d-lg-inline">{{#if hit.last-seen}}Last seen {{moment-from-now hit.last-seen}} {{/if}}</span><i class="fas {{faIcon}}"></i></small>
   </div>
   <p class="mb-1">{{{hit.description}}}</p>
-  <small><a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a> - {{hit.size}}bytes</small>{{#if hit.last-seen}}<small> - Last seen {{moment-from-now hit.last-seen}}</small>{{/if}}
+  <small><a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a> - {{hit.size}}bytes</small>
 </div>
 
 {{#bs-modal class="modal fade bd-result-modal-lg" size="lg" open=openModal onSubmit=(action (mut openModal)) onHidden=(action (mut openModal) false) as |modal|}}

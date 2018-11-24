@@ -65,6 +65,16 @@
 @import "includes/colors";
 @import "includes/helpers";
 
+.available {
+  color: $available-color;
+}
+.might-be-available {
+  color: $might-be-available-color;
+}
+.unavailable {
+  color: $unavailable-color;
+}
+
 .header-wrapper {
   z-index: 1;
   position:fixed;
