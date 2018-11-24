@@ -4,7 +4,7 @@
     <small class="text-muted"><i class="fas fa-volume-up"></i></small>
   </div>
   <p class="mb-1">{{{hit.description}}}</p>
-  <small><a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a> - {{hit.size}}bytes</small>
+  <small><a href="https://ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a> - {{hit.size}}bytes</small>{{#if hit.last-seen}}<small> - Last seen {{moment-from-now hit.last-seen}}</small>{{/if}}
 </div>
 
 {{#bs-modal class="modal fade bd-result-modal-lg" size="lg" open=openModal onSubmit=(action (mut openModal)) onHidden=(action (mut openModal) false) as |modal|}}
