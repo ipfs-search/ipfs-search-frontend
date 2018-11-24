@@ -5,7 +5,7 @@ import Controller from '@ember/controller';
 export default Controller.extend({
 
   searchPlaceholder: computed('kind', function() {
-    const searchKind = this.get('kind');
+    const searchKind = this.kind;
     return `Search ${searchKind}`;
   })
 });

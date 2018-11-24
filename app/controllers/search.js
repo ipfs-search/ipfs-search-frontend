@@ -35,7 +35,7 @@ export default Controller.extend({
         }
       }
 
-      yield this.get('ajax').request('https://api.ipfs-search.com/v1/search', {
+      yield this.ajax.request('https://api.ipfs-search.com/v1/search', {
         method: 'GET',
         data: { q: search, page: page, _type: fileOrDirectory }
       }).catch( (err) => {
@@ -45,7 +45,7 @@ export default Controller.extend({
         data.kind = kind;
         data.search = search;
         data.page = page;
-        this.get('activePageService').set('page', 'search-page search-results');
+        this.activePageService.set('page', 'search-page search-results');
         this.set('data', data);
       });
     } else {
@@ -56,14 +56,14 @@ export default Controller.extend({
   actions: {
     updateSearch( { kind, search } ){
       this.setProperties( { kind, search } );
-      this.get('searchRepo').perform( { kind, search, page: 0 });
+      this.searchRepo.perform( { kind, search, page: 0 });
       // // proactively set the target
       // this.get('activePageService').set('page', 'search-page search-transition-to-results');
     },
     setPage( page ) {
       console.log('setting page');
       this.setProperties( { page } );
-      this.get('searchRepo').perform( { kind: this.get('kind'), search: this.get('search'), page } );
+      this.searchRepo.perform( { kind: this.kind, search: this.search, page } );
     }
   }
 });

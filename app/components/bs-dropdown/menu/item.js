@@ -6,10 +6,10 @@ export default BsDropdownMenuItem.extend({
   classNameBindings: "isActiveClass",
 
   isActiveClass: computed( 'active', function(){
-    return this.get('active') && "active";
+    return this.active && "active";
   } ),
   click: function() {
-    if( this.get('action') )
-      this.get('action')();
+    if( this.action )
+      this.action();
   }
 });

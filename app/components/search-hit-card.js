@@ -5,7 +5,7 @@ export default Component.extend({
   tagName: '',
 
   cardOpen: computed( 'more', 'forceExpand', function() {
-    return this.get('more') || this.get('forceExpand');
+    return this.more || this.forceExpand;
   }),
   actions: {
     showMore(){
