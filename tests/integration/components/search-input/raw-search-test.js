@@ -12,15 +12,8 @@ module('Integration | Component | search-input/raw-search', function(hooks) {
 
     await render(hbs`{{search-input/raw-search}}`);
 
-    assert.dom(this.element).hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#search-input/raw-search}}
-        template block text
-      {{/search-input/raw-search}}
-    `);
-
-    assert.dom(this.element).hasText('template block text');
+    assert.equal( this.element.getElementsByClassName("ember-text-field").length, 1, "Should have one textfield" );
+    assert.equal( this.element.getElementsByClassName("dropdown-menu").length, 1, "Should have one dropdown menu" );
+    assert.equal( this.element.getElementsByClassName("search-button").length, 1, "Should have one search button" );
   });
 });

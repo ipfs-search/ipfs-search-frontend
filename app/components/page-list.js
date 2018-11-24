@@ -30,7 +30,6 @@ export default Component.extend({
   }),
   actions: {
     selectPage( page ){
-      console.log(`Selecting page ${page}`);
       const functor = this['on-change'];
       functor(page);
     }

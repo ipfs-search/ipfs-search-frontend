@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | search hit card', function(hooks) {
@@ -10,17 +10,13 @@ module('Integration | Component | search hit card', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
 
-    await render(hbs`{{search-hit-card}}`);
+    this.set('hit', {
+      hash: "1234",
+      size: "42"
+    });
 
-    assert.dom('*').hasText('');
+    await render(hbs`{{search-hit-card hit=hit}}`);
 
-    // Template block usage:
-    await render(hbs`
-      {{#search-hit-card}}
-        template block text
-      {{/search-hit-card}}
-    `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('*').hasText('1234 - 42bytes');
   });
 });

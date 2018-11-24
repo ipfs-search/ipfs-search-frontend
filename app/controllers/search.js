@@ -12,8 +12,6 @@ export default Controller.extend({
   ajax: inject(),
 
   searchRepo: task(function * ( { kind, page, search } ) {
-    console.log('Reloading model');
-
     if( search || kind ) {
       if( ! search ) { search = ""; }
       let fileOrDirectory = "file";
@@ -61,7 +59,6 @@ export default Controller.extend({
       // this.get('activePageService').set('page', 'search-page search-transition-to-results');
     },
     setPage( page ) {
-      console.log('setting page');
       this.setProperties( { page } );
       this.searchRepo.perform( { kind: this.kind, search: this.search, page } );
     }

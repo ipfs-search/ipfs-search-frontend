@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject } from '@ember/service';
 import Controller from '@ember/controller';

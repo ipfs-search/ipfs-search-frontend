@@ -12,15 +12,6 @@ module('Integration | Component | search-input', function(hooks) {
 
     await render(hbs`{{search-input}}`);
 
-    assert.dom(this.element).hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#search-input}}
-        template block text
-      {{/search-input}}
-    `);
-
-    assert.dom(this.element).hasText('template block text');
+    assert.equal(this.element.getElementsByClassName("search-box").length, 1, "Should have one search-box");
   });
 });

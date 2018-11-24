@@ -13,14 +13,5 @@ module('Integration | Component | search-results', function(hooks) {
     await render(hbs`{{search-results}}`);
 
     assert.dom(this.element).hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#search-results}}
-        template block text
-      {{/search-results}}
-    `);
-
-    assert.dom(this.element).hasText('template block text');
   });
 });

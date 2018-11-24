@@ -12,15 +12,6 @@ module('Integration | Component | search-identity', function(hooks) {
 
     await render(hbs`{{search-identity}}`);
 
-    assert.dom(this.element).hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#search-identity}}
-        template block text
-      {{/search-identity}}
-    `);
-
-    assert.dom(this.element).hasText('template block text');
+    assert.ok( this.element.getElementsByTagName("img").length, 1, "Should have one image" );
   });
 });
