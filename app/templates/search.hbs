@@ -25,21 +25,27 @@
     {{#if searchRepo.isRunning}}
       loading
     {{else}}
-      <div class="row d-none d-sm-block">
-        <div class="col results-header d-flex justify-content-end mt-3">
-          <p><small>We found {{data.total}} results in {{data.page_count}} pages for your search!</small></p>
+      {{#if errorOccurred}}
+        <div class="error">
+          Could not fetch results from the backend.  Please try again.
         </div>
-      </div>
-
-      <div class="search-results">
-        {{search-results results=data kind=kind}}
-      </div>
-
-      <div class="row">
-        <div class="col d-flex justify-content-end">
-          {{page-list totalPages=data.page_count currentPage=data.page on-change=(action "setPage")}}
+      {{else}}
+        <div class="row d-none d-sm-block">
+          <div class="col results-header d-flex justify-content-end mt-3">
+            <p><small>We found {{data.total}} results in {{data.page_count}} pages for your search!</small></p>
+          </div>
         </div>
-      </div>
+
+        <div class="search-results">
+          {{search-results results=data kind=kind}}
+        </div>
+
+        <div class="row">
+          <div class="col d-flex justify-content-end">
+            {{page-list totalPages=data.page_count currentPage=data.page on-change=(action "setPage")}}
+          </div>
+        </div>
+      {{/if}}
     {{/if}}
   </div>
 </div>

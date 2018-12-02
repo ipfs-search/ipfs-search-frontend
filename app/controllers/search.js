@@ -33,11 +33,15 @@ export default Controller.extend({
         }
       }
 
+      this.set("errorOccurred", false);
+
       yield this.ajax.request('https://api.ipfs-search.com/v1/search', {
         method: 'GET',
         data: { q: search, page: page, _type: fileOrDirectory }
       }).catch( (err) => {
         window.lasterr = err;
+        this.activePageService.set('page', 'search-page search-results');
+        this.set('errorOccurred', true);
         throw err;
       } ).then( (data) => {
         data.kind = kind;
