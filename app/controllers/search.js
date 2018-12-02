@@ -12,7 +12,7 @@ export default Controller.extend({
   ajax: inject(),
 
   searchRepo: task(function * ( { kind, page, search } ) {
-    if( search || kind ) {
+    if( search || ( kind && kind !== "any") ) {
       if( ! search ) { search = ""; }
       let fileOrDirectory = "file";
       if( kind ){
@@ -51,10 +51,15 @@ export default Controller.extend({
     }
   }).restartable(),
   
+  executeNewSearch(page = this.get('page')) {
+    this.searchRepo.perform( { kind: this.kind, search: this.search, page });
+  },
+
   actions: {
     updateSearch( { kind, search } ){
       this.setProperties( { kind, search } );
-      this.searchRepo.perform( { kind, search, page: 0 });
+      let page = 0;
+      this.executeNewSearch(page);
       // // proactively set the target
       // this.get('activePageService').set('page', 'search-page search-transition-to-results');
     },
