@@ -117,7 +117,7 @@
         position: absolute;
         font-size:28px;
         color: darken( $white-color, 30% );
-        left:-3px;
+        left:1px;
         top:0;
       }
     }
@@ -130,6 +130,23 @@
   z-index: 0;
   position:relative;
   .container {
+    .list-group {
+      .list-group-item {
+        &:hover {
+          cursor: pointer;
+        }
+        h5 {
+          overflow: hidden;
+          word-wrap:break-word;
+          padding-right: 12px;
+          width: 100% !important;
+        }
+        p, small {
+          overflow: hidden;
+          word-wrap:break-word;
+        }
+      }
+    }
     .form-check {
       padding-top: 5px;
       padding-bottom: 5px;
@@ -219,10 +236,10 @@
         }
       }
       .results-header {
-        margin-right: 15px;
+        padding-right: 15px;
       }
       .pagination {
-        margin-right: 15px;
+        padding-right: 15px;
       }
     }
   }
@@ -241,6 +258,7 @@
 }
 
 .modal {
+  padding-right: 0 !important;
   .modal-dialog {
     margin-top: 0;
     margin-bottom:0;
@@ -248,8 +266,15 @@
       height:100vh;
       border-radius: 0;
       border: 0;
+      overflow-y: scroll; /* has to be scroll, not auto */
+      -webkit-overflow-scrolling: touch;
       .modal-header {
         border-bottom: none;
+        h5 {
+          overflow: hidden;
+          word-wrap:break-word;
+          line-height: 115%;
+        }
       }
       .modal-body {
         padding-top:0;
@@ -257,6 +282,12 @@
         background-color: white;
         p {
           align-self: flex-start;
+        }
+        dl {
+          dd {
+            overflow: hidden;
+            word-wrap:break-word;
+          }
         }
       }
     }
