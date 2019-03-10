@@ -26,6 +26,26 @@ export default Component.extend({
       return "unavailable";
     }
   }),
+  kind: computed( 'hit.type', 'hit.mimetype', function() {
+    const type = this.get('hit.type');
+    const mimetype = this.get('hit.mimetype');
+
+    if( type === "directory" ) {
+      return "directory";
+    } else if( ! mimetype ) {
+      return "file";
+    } else if( mimetype.indexOf("image") === 0 ) {
+      return "image";
+    } else if( mimetype.indexOf("text") === 0 ) {
+      return "text";
+    } else if( mimetype.indexOf("video") === 0 ) {
+      return "video";
+    } else if( mimetype.indexOf("audio") === 0 ) {
+      return "audio";
+    } else {
+      return "any";
+    }
+  }),
   faIcon: computed( 'kind', function() {
     if( this.kind == "image" )
       return "fa-image";
