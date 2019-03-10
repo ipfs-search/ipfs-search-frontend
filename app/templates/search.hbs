@@ -5,7 +5,7 @@
       <div class="col identity-wrapper">
         <h1 class="d-flex justify-content-center">
           <a href="http://ipfssearch.com">
-            <img src="assets/logo_white_bright.svg" alt="IPFS Search" />
+            <img src="assets/logo_white_bright.svg" alt="ipfs-search.com logo" />
           </a>
         </h1>
       </div>
@@ -23,11 +23,19 @@
 <div class="results-wrapper">
   <div class="container">
     {{#if searchRepo.isRunning}}
-      loading
+      <div class="row align-items-center" style="min-height: 50vh;">
+        <div class="col d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
     {{else}}
       {{#if errorOccurred}}
-        <div class="error">
-          Could not fetch results from the backend.  Please try again.
+        <div class="row align-items-center" style="min-height: 50vh;">
+          <div class="col d-flex justify-content-center" style="color: red;">
+            Could not fetch results from the backend.  Please try again later.
+          </div>
         </div>
       {{else}}
         <div class="row d-none d-sm-block">
