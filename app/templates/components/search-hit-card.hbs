@@ -19,6 +19,20 @@
     <p>{{{hit.description}}}</p>
 
     <dl class="row mt-3">
+      <dt class="col-sm-3">
+        Mimetype
+      </dt>
+      <dd class="col-sm-9">
+        {{hit.mimetype}}
+      </dd>
+
+      <dt class="col-sm-3">
+        First seen
+      </dt>
+      <dd class="col-sm-9">
+        {{moment-from-now hit.first-seen}}
+      </dd>
+
       {{#if hit.size}}
         <dt class="col-sm-3">
           Size
@@ -27,6 +41,8 @@
           {{hit.size}} bytes
         </dd>
       {{/if}}
+    </dl>
+    <dl class="row mt-3">
       <dt class="col-sm-3">
         Direct link
       </dt>
