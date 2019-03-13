@@ -3,6 +3,7 @@
 if output=$(git status --porcelain) && [ -z "$output" ]; then
     # Working directory clean
     npm install
+    rm -rf dist/*
     ember build --environment production
     git checkout v2_rendered
     cp -r dist/* .
