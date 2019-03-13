@@ -12,7 +12,7 @@
   {{#modal.header}}
     <h5 class="modal-title">
       {{{hit.title}}}
-      <div class="badge">2</div>
+      <div class="badge"><small class={{availabilityClass}}><span class="d-none d-lg-inline">{{#if hit.last-seen}}Last seen {{moment-from-now hit.last-seen}} {{/if}}</span><i class="fas {{faIcon}}"></i></small></div>
     </h5>
   {{/modal.header}}
   {{#modal.body}}
