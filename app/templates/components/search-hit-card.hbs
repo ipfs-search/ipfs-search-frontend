@@ -5,7 +5,7 @@
     <small class={{availabilityClass}}><span class="d-none d-lg-inline">{{#if hit.last-seen}}Last seen {{moment-from-now hit.last-seen}} {{/if}}</span><i class="fas {{faIcon}}"></i></small>
   </div>
   <p class="mb-1">{{{hit.description}}}</p>
-  <small><a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a>{{#if git.size}} - {{hit.size}} bytes{{/if}}</small>
+  <small><a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a>{{#if hit.size}} - {{hit.size}} bytes{{/if}}</small>
 </div>
 
 {{#bs-modal class="modal fade bd-result-modal-lg" size="lg" open=openModal onSubmit=(action (mut openModal)) onHidden=(action (mut openModal) false) as |modal|}}
