@@ -16,7 +16,24 @@
     </h5>
   {{/modal.header}}
   {{#modal.body}}
+
     <p>{{{hit.description}}}</p>
+
+    {{#if (eq kind "image")}}
+      <div class="embed-responsive">
+        <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}"><img src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" alt="Preview of found image" /></a>
+      </div>
+    {{/if}}
+    {{#if (eq kind "video")}}
+      <div class="embed-responsive embed-responsive-16by9">
+        <video class="embed-responsive-item" src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata" />
+      </div>
+    {{/if}}
+    {{#if (eq kind "audio")}}
+      <div class="embed-responsive">
+        <audio controls="" src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" />
+      </div>
+    {{/if}}
 
     <dl class="row mt-3">
       <dt class="col-sm-3">
@@ -50,26 +67,5 @@
         <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">{{hit.hash}}</a>
       </dd>
     </dl>
-
-    {{#if (eq kind "image")}}
-      <div class="embed-responsive">
-        <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}"><img src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" alt="Preview of found image" /></a>
-      </div>
-    {{/if}}
-    {{#if (eq kind "video")}}
-      <div class="embed-responsive embed-responsive-16by9">
-        <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}"><video class="embed-responsive-item" src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata" /></a>
-      </div>
-      <video src="controls" preload="metadata" />
-    {{/if}}
-    {{#if (eq kind "audio")}}
-      <div class="embed-responsive">
-        <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">
-          <audio controls="controls">
-            <source src="https://gateway.ipfs.io/ipfs/{{hit.hash}}">
-          </audio>
-        </a>
-      </div>
-    {{/if}}
   {{/modal.body}}
 {{/bs-modal}}
