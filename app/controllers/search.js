@@ -35,9 +35,12 @@ export default Controller.extend({
 
       this.set("errorOccurred", false);
 
+      if( kind == "directory" )
+        search += " _type:directory";
+
       yield this.ajax.request('https://api.ipfs-search.com/v1/search', {
         method: 'GET',
-        data: { q: search, page: page, _type: fileOrDirectory }
+        data: { q: search, page: page }
       }).catch( (err) => {
         window.lasterr = err;
         this.activePageService.set('page', 'search-page search-results');
