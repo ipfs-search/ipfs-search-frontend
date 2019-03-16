@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import moment from 'moment';
+import humanizeBytes from '../utils/humanize-bytes';
 
 export default Component.extend({
   tagName: '',
@@ -47,8 +48,10 @@ export default Component.extend({
     }
   }),
   humanizedSize: computed ( 'hit.size', function(){
-    function formatBytes(a,b){if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]}
-    return formatBytes(parseInt(this.get('hit.size')));
+    if (this.get('hit.size'))
+      return humanizeBytes(parseInt(this.get('hit.size')));
+    else
+      return "";
   }),
   faIcon: computed( 'kind', function() {
     if( this.kind == "image" )
