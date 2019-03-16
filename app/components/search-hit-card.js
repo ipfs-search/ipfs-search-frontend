@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import moment from 'moment';
+import humanizeBytes from '../utils/humanize-bytes';
 
 export default Component.extend({
   tagName: '',
@@ -45,6 +46,12 @@ export default Component.extend({
     } else {
       return "any";
     }
+  }),
+  humanizedSize: computed ( 'hit.size', function(){
+    if (this.get('hit.size'))
+      return humanizeBytes(parseInt(this.get('hit.size')));
+    else
+      return "";
   }),
   faIcon: computed( 'kind', function() {
     if( this.kind == "image" )
