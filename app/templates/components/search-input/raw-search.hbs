@@ -9,7 +9,7 @@
     {{/dd.button}}
 
     <div class="input-group-append">
-      {{#dd.menu class="dropdown-menu dropdown-menu-right" as |menu|}}
+      {{#dd.menu class="dropdown-menu dropdown-menu-right clickable-menu-items" as |menu|}}
         {{#menu.item active=(eq newSearchKind "file") action=(action "changeKind" "file")}}
           Any file
         {{/menu.item}}
