@@ -18,6 +18,10 @@
   }
 }
 
+.page-link {
+  cursor: pointer;
+}
+
 .btn-group > .input-group-append:not(:last-child) {
   @include border-right-radius(0);
 }
