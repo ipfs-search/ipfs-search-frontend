@@ -292,6 +292,9 @@
   }
 }
 
+.ignore-mouse {
+  pointer-events: none;
+}
 // What happens if we have results
 // .search-page.search-results {
 //   .header-wrapper {
