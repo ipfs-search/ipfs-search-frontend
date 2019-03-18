@@ -1,6 +1,11 @@
 @import "ember-bootstrap/bootstrap";
 
 // START to de desigend
+.page-link.current-page {
+  font-weight: bold;
+  background-color: #f4f4f4;
+}
+
 .page-link.current-page, .page-link.has-more-pages {
   color: black;
   pointer-events: none;
