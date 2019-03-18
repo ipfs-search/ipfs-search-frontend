@@ -12,6 +12,16 @@
 }
 // END to be designed
 
+.clickable-menu-items {
+  .dropdown-item {
+    cursor: pointer;
+  }
+}
+
+.page-link {
+  cursor: pointer;
+}
+
 .btn-group > .input-group-append:not(:last-child) {
   @include border-right-radius(0);
 }

@@ -20,9 +20,10 @@
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.3.1",
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.1.0",
+    "ember-bootstrap": "^2.6.0",
     "ember-cli": "~3.5.1",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-babel": "^6.16.0",
@@ -62,7 +63,6 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
-    "ember-bootstrap": "^1.2.0",
     "npm": "^5.7.1"
   }
 }
