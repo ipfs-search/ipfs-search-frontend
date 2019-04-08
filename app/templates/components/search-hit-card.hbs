@@ -8,7 +8,7 @@
   <small><a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a>{{#if hit.size}} - {{humanizedSize}}{{/if}}</small>
 </div>
 
-{{#bs-modal class="modal fade bd-result-modal-lg" size="lg" open=openModal onSubmit=(action (mut openModal)) onHidden=(action (mut openModal) false) as |modal|}}
+{{#bs-modal class="search-result-modal modal fade bd-result-modal-lg" size="lg" open=openModal onSubmit=(action (mut openModal)) onHidden=(action (mut openModal) false) as |modal|}}
   {{#modal.header}}
     <h5 class="modal-title">
       {{{hit.title}}}
@@ -20,7 +20,7 @@
     <p>{{{hit.description}}}</p>
 
     {{#if (eq kind "image")}}
-      <div class="embed-responsive">
+      <div class="embed-responsive image-preview">
         <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}"><img src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" alt="Preview of found image" /></a>
       </div>
     {{/if}}

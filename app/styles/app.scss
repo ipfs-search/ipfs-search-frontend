@@ -1,5 +1,9 @@
 @import "ember-bootstrap/bootstrap";
 
+.search-result-modal .image-preview img {
+    max-width: 100%;
+}
+
 // START to de desigend
 .page-link.current-page {
   font-weight: bold;
