@@ -3,7 +3,7 @@
 
     <div class="list-group">
       {{#each results.hits as |hit|}}
-        {{search-hit-card hit=hit forceExpand=openAllResults}}
+        {{search-hit-card hit=hit forceExpand=openAllResults onPreview=(action "addToAlreadyPreviewdResults")}}
       {{/each}}
     </div>
 
