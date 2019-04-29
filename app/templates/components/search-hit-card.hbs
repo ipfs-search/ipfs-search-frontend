@@ -18,9 +18,9 @@
   {{#modal.body}}
     {{#if showMetadata}}
       {{metadata-info hit=hit}}
-      <span {{action (mut showMetadata) false}}>Hide metadata</span>
+      <span {{action (mut showMetadata) false}} class="btn btn-light">Hide metadata</span>
     {{else}}
-      <span {{action (mut showMetadata) true}}>Show metadata</span>
+      <span {{action (mut showMetadata) true}} class="btn btn-light">Show metadata</span>
     {{/if}}
 
     <p>{{{hit.description}}}</p>
