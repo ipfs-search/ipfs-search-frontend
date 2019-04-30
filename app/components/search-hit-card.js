@@ -5,8 +5,6 @@ import humanizeBytes from '../utils/humanize-bytes';
 
 export default Component.extend({
   tagName: '',
-  previewed: false,
-  old: false,
 
   cardOpen: computed( 'more', 'forceExpand', function() {
     return this.more || this.forceExpand;
@@ -71,26 +69,12 @@ export default Component.extend({
     else
       return "fa-file-alt"; // fallback is same as any
   } ),
-  previewClass: computed('previewed', 'old', function() {
-    if (this.previewed)
-      return `selected${this.old ? '-old' : ''}`;
-    else
-      return '';
-  }),
-  setOld(){
-    this.set('old', true);
-  },
-  setNew(){
-    this.set('old', false);
-  },
   actions: {
     showMore(){
       this.toggleProperty('more');
     },
     openModal(){
       this.toggleProperty('openModal');
-      this.set('previewed', true);
-      this.onPreview(this);
     }
   }
 });
