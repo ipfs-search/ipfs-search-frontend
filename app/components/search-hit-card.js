@@ -75,6 +75,7 @@ export default Component.extend({
     },
     openModal(){
       this.toggleProperty('openModal');
+      this.onclick();
     }
   }
 });
