@@ -6,6 +6,7 @@ import humanizeBytes from '../utils/humanize-bytes';
 export default Component.extend({
   tagName: '',
   selected: false,
+  showMetadata: false,
 
   cardOpen: computed( 'more', 'forceExpand', function() {
     return this.more || this.forceExpand;
