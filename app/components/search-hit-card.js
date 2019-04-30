@@ -5,6 +5,7 @@ import humanizeBytes from '../utils/humanize-bytes';
 
 export default Component.extend({
   tagName: '',
+  selected: false,
   showMetadata: false,
 
   cardOpen: computed( 'more', 'forceExpand', function() {
@@ -76,6 +77,8 @@ export default Component.extend({
     },
     openModal(){
       this.toggleProperty('openModal');
+      if (typeof this.onOpenDetail === "function")
+        this.onOpenDetail();
     }
   }
 });
