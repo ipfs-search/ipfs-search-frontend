@@ -3,7 +3,7 @@
 
     <div class="list-group">
       {{#each results.hits as |hit|}}
-        {{search-hit-card hit=hit forceExpand=openAllResults onclick=(action "setAsSelectedHit" hit.hash) selected=(eq hit.hash selectedHit)}}
+        {{search-hit-card hit=hit forceExpand=openAllResults onclick=(action (mut selectedHit) hit.hash) selected=(eq hit.hash selectedHit)}}
       {{/each}}
     </div>
 
