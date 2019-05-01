@@ -58,7 +58,7 @@ export default Controller.extend({
     }
   }).restartable(),
   
-  executeNewSearch(page = this.get('page')) {
+  executeNewSearch(page = this.page) {
     this.searchRepo.perform( { kind: this.kind, search: this.search, page });
   },
 

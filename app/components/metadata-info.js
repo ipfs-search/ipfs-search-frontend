@@ -27,7 +27,7 @@ export default Component.extend({
   } ).restartable(),
 
   tableContents: computed('metadata', function() {
-    const metadataObject = this.get("metadata") || {};
+    const metadataObject = this.metadata || {};
 
     return Object.entries( metadataObject ).map( ([key, values]) => {
       return { key: key, valueString: values.join(",") };
