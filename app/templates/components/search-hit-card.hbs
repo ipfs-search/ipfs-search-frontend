@@ -16,15 +16,7 @@
     </h5>
   {{/modal.header}}
   {{#modal.body}}
-    {{#if showMetadata}}
-      {{metadata-info hit=hit}}
-      <span {{action (mut showMetadata) false}} class="btn btn-light">Hide metadata</span>
-    {{else}}
-      <span {{action (mut showMetadata) true}} class="btn btn-light">Show metadata</span>
-    {{/if}}
-
-    <p>{{{hit.description}}}</p>
-
+    {{! Preview }}
     {{#if (eq kind "image")}}
       <div class="embed-responsive image-preview">
         <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}"><img src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" alt="Preview of found image" /></a>
@@ -40,6 +32,8 @@
         <audio controls="" src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" />
       </div>
     {{/if}}
+
+    <p>{{{hit.description}}}</p>
 
     <dl class="row mt-3">
       <dt class="col-sm-3">
@@ -73,5 +67,11 @@
         <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">{{hit.hash}}</a>
       </dd>
     </dl>
+    {{#if showMetadata}}
+      <p {{action (mut showMetadata) false}} class="btn btn-light">Hide metadata</p>
+      {{metadata-info hit=hit}}
+    {{else}}
+      <p {{action (mut showMetadata) true}} class="btn btn-light">Show metadata</p>
+    {{/if}}
   {{/modal.body}}
 {{/bs-modal}}
