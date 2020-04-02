@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { inject } from '@ember/service';
 import { task } from 'ember-concurrency';
+import fetch from 'fetch';
 
 export default Controller.extend({
   queryParams: ['search', 'page', 'kind'],
@@ -9,7 +10,6 @@ export default Controller.extend({
   kind: "any",
 
   activePageService: inject(),
-  ajax: inject(),
 
   searchRepo: task(function * ( { kind, page, search } ) {
     if( search || ( kind && kind !== "any") ) {
@@ -38,26 +38,25 @@ export default Controller.extend({
       if( kind == "directory" )
         search += " _type:directory";
 
-      yield this.ajax.request('https://api.ipfs-search.com/v1/search', {
-        method: 'GET',
-        data: { q: search, page: page }
-      }).catch( (err) => {
-        window.lasterr = err;
-        this.activePageService.set('page', 'search-page search-results');
-        this.set('errorOccurred', true);
-        throw err;
-      } ).then( (data) => {
+      try {
+        const req = yield fetch(`https://api.ipfs-search.com/v1/search?q=${encodeURIComponent(search)}&page=${encodeURIComponent(page)}`);
+        const data = yield req.json();
         data.kind = kind;
         data.search = search;
         data.page = page;
         this.activePageService.set('page', 'search-page search-results');
         this.set('data', data);
-      });
+      } catch (err) {
+        window.lasterr = err;
+        this.activePageService.set('page', 'search-page search-results');
+        this.set('errorOccurred', true);
+        throw err;
+      }
     } else {
       this.set('data', null);
     }
   }).restartable(),
-  
+
   executeNewSearch(page = this.page) {
     this.searchRepo.perform( { kind: this.kind, search: this.search, page });
   },

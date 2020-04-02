@@ -2,6 +2,7 @@ import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { task, timeout } from 'ember-concurrency';
 import { inject } from '@ember/service';
+import fetch from 'fetch';
 
 export default Component.extend({
   tagName: "",
@@ -15,8 +16,6 @@ export default Component.extend({
     this.fetchMetadata.perform();
   },
 
-  ajax: inject(),
-
   fetchMetadata: task( function * () {
     const hash = this.get('hit.hash');
 
@@ -24,7 +23,9 @@ export default Component.extend({
 
     if( !hash ) return;
 
-    const response = yield this.ajax.request(`https://api.ipfs-search.com/v1/metadata/${hash}`);
+    const req = yield fetch(`https://api.ipfs-search.com/v1/metadata/${hash}`);
+    const response = yield req.json();
+
     this.set('metadata', response.metadata);
   } ).restartable(),
 
