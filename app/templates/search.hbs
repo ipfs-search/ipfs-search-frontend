@@ -13,7 +13,7 @@
 
     <div class="row search-bar">
       <div class="col d-flex justify-content-center">
-        {{search-input/raw-search kind=kind search=search onSearch=(action "updateSearch")}}
+        <SearchInput::RawSearch @kind={{kind}} @search={{search}} @onSearch={{action "updateSearch"}} />
       </div>
     </div>
 
@@ -45,12 +45,12 @@
         </div>
 
         <div class="search-results">
-          {{search-results results=data}}
+          <SearchResults @results={{data}} />
         </div>
 
         <div class="row">
           <div class="col d-flex justify-content-end">
-            {{page-list totalPages=data.page_count currentPage=data.page on-change=(action "setPage")}}
+            <PageList @totalPages={{data.page_count}} @currentPage={{data.page}} @on-change={{action "setPage"}} />
           </div>
         </div>
       {{/if}}
