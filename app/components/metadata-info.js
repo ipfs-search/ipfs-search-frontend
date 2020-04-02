@@ -4,6 +4,8 @@ import { task, timeout } from 'ember-concurrency';
 import { inject } from '@ember/service';
 
 export default Component.extend({
+  tagName: "",
+
   init(){
     this._super(...arguments);
     this.fetchMetadata.perform();

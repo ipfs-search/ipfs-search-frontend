@@ -1,23 +1,25 @@
-<nav aria-label="Page navigation">
-  <ul class="pagination mt-3">
-    {{#if totalPages}}
-      {{#if (not isFirstPage)}}
-        <li class="page-item" {{action "selectPage" 0}}><span class="page-link">First</span></li>
+<div ...attributes>
+  <nav aria-label="Page navigation">
+    <ul class="pagination mt-3">
+      {{#if totalPages}}
+        {{#if (not isFirstPage)}}
+          <li class="page-item" {{action "selectPage" 0}}><span class="page-link">First</span></li>
+        {{/if}}
+        {{#each pagesBeforeMe as |page|}}
+          <li class="page-item"><span class="page-link" {{action "selectPage" page}}>{{plus-one page}}</span></li>
+        {{/each}}
+        {{#if isFirstPage}}
+          <li class="page-item"><span class="page-link current-page">First</span></li>
+        {{else}}
+          <li class="page-item"><span class="page-link current-page">{{plus-one currentPage}}</span></li>
+        {{/if}}
+        {{#each pagesAfterMe as |page|}}
+          <li class="page-item"><span class="page-link" {{action "selectPage" page}}>{{plus-one page}}</span></li>
+        {{/each}}
+        {{#if hasMorePages}}
+          <li class="page-item"><span class="page-link has-more-pages">...</span></li>
+        {{/if}}
       {{/if}}
-      {{#each pagesBeforeMe as |page|}}
-        <li class="page-item"><span class="page-link" {{action "selectPage" page}}>{{plus-one page}}</span></li>
-      {{/each}}
-      {{#if isFirstPage}}
-        <li class="page-item"><span class="page-link current-page">First</span></li>
-      {{else}}
-        <li class="page-item"><span class="page-link current-page">{{plus-one currentPage}}</span></li>
-      {{/if}}
-      {{#each pagesAfterMe as |page|}}
-        <li class="page-item"><span class="page-link" {{action "selectPage" page}}>{{plus-one page}}</span></li>
-      {{/each}}
-      {{#if hasMorePages}}
-        <li class="page-item"><span class="page-link has-more-pages">...</span></li>
-      {{/if}}
-    {{/if}}
-  </ul>
-</nav>
+    </ul>
+  </nav>
+</div>

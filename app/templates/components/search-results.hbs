@@ -1,11 +1,13 @@
-<div class="row">
-  <div class="col">
+<div ...attributes>
+  <div class="row">
+    <div class="col">
 
-    <div class="list-group">
-      {{#each results.hits as |hit|}}
-        {{search-hit-card hit=hit forceExpand=openAllResults onOpenDetail=(action (mut selectedHit) hit.hash) selected=(eq hit.hash selectedHit)}}
-      {{/each}}
+      <div class="list-group">
+        {{#each results.hits as |hit|}}
+          {{search-hit-card hit=hit forceExpand=openAllResults onOpenDetail=(action (mut selectedHit) hit.hash) selected=(eq hit.hash selectedHit)}}
+        {{/each}}
+      </div>
+
     </div>
-
   </div>
 </div>
