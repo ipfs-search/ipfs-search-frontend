@@ -1,9 +1,15 @@
-import { alias } from '@ember/object/computed';
-import { inject } from '@ember/service';
+import classic from "ember-classic-decorator";
+import { classNameBindings } from "@ember-decorators/component";
+import { inject } from "@ember/service";
+import { alias } from "@ember/object/computed";
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-  activePageService: inject(),
-  classNameBindings: ['activePage'],
-  activePage: alias( 'activePageService.page')
-});
+@classic
+@classNameBindings('activePage')
+export default class ApplicationController extends Controller {
+  @inject()
+  activePageService;
+
+  @alias('activePageService.page')
+  activePage;
+}
