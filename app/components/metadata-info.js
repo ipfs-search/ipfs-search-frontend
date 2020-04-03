@@ -1,23 +1,20 @@
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import { task, timeout } from 'ember-concurrency';
-import { inject } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import Component from '@glimmer/component';
+import { timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 import fetch from 'fetch';
 
-export default Component.extend({
-  tagName: "",
+export default class MetdataInfoComponent extends Component {
+  @tracked metadata = null;
 
-  init(){
-    this._super(...arguments);
+  constructor(){
+    super( ...arguments );
     this.fetchMetadata.perform();
-  },
+  }
 
-  didReceiveAttrs(){
-    this.fetchMetadata.perform();
-  },
-
-  fetchMetadata: task( function * () {
-    const hash = this.get('hit.hash');
+  @task({restartable: true})
+  *fetchMetadata() {
+    const hash = this.args.hit.hash;
 
     yield timeout( 50 );
 
@@ -26,14 +23,14 @@ export default Component.extend({
     const req = yield fetch(`https://api.ipfs-search.com/v1/metadata/${hash}`);
     const response = yield req.json();
 
-    this.set('metadata', response.metadata);
-  } ).restartable(),
+    this.metadata = response.metadata;
+  }
 
-  tableContents: computed('metadata', function() {
+  get tableContents() {
     const metadataObject = this.metadata || {};
 
     return Object.entries( metadataObject ).map( ([key, values]) => {
-      return { key: key, valueString: values.join(",") };
-    } );
-  })
-});
+      return { key, valueString: values.join(",") };
+    });
+  }
+}

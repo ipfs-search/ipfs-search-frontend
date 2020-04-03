@@ -1,24 +1,22 @@
-<div ...attributes>
-  {{#if fetchMetadat.isRunning}}
-    ...loading metadata...
-  {{else}}
-    <div class="table-responsive">
-      <table class="table table-sm table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Key</th>
-            <th scope="col">Values</th>
-          </tr>
-        </thead>
-        <tbody>
-        {{#each tableContents as |row|}}
+{{#if this.fetchMetadata.isRunning}}
+  ...loading metadata...
+{{else}}
+  <div class="table-responsive">
+    <table class="table table-sm table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Key</th>
+          <th scope="col">Values</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.tableContents as |row|}}
           <tr>
             <td scope="row" class="bg-light">{{row.key}}</td>
             <td scope="row">{{row.valueString}}</td>
           </tr>
         {{/each}}
-        </tbody>
-      </table>
-    </div>
-  {{/if}}
-</div>
+      </tbody>
+    </table>
+  </div>
+{{/if}}
