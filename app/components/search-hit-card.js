@@ -1,19 +1,28 @@
-import { computed } from '@ember/object';
-import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+import { get } from '@ember/object';
+import Component from '@glimmer/component';
 import moment from 'moment';
 import humanizeBytes from '../utils/humanize-bytes';
 
-export default Component.extend({
-  tagName: '',
-  selected: false,
-  showMetadata: false,
+export default class SearchHitCardComponent extends Component {
+  @tracked showMetadata = false;
+  @tracked detailsAreShown = false;
+  @tracked more = false;
 
-  cardOpen: computed( 'more', 'forceExpand', function() {
+  get hit() {
+    return this.args.hit;
+  }
+
+  get cardOpen(){
     return this.more || this.forceExpand;
-  }),
-  availabilityClass: computed( 'hit.last-seen', function() {
-    if( this.get('hit.last-seen') ) {
-      const then = moment( this.get('hit.last-seen') );
+  }
+
+  get availabilityClas() {
+    const lastSeen = get( this.hit, "last-seen" );
+
+    if( lastSeen ) {
+      const then = moment( lastSeen );
       const timeDiff = moment().diff( then );
 
       const duration = moment.duration( timeDiff );
@@ -28,10 +37,11 @@ export default Component.extend({
       // return "availability-unknown";
       return "unavailable";
     }
-  }),
-  kind: computed( 'hit.type', 'hit.mimetype', function() {
-    const type = this.get('hit.type');
-    const mimetype = this.get('hit.mimetype');
+  }
+
+  get kind() {
+    const type = this.hit.type;
+    const mimetype = this.hit.mimetype;
 
     if( type === "directory" ) {
       return "directory";
@@ -48,14 +58,16 @@ export default Component.extend({
     } else {
       return "any";
     }
-  }),
-  humanizedSize: computed ( 'hit.size', function(){
-    if (this.get('hit.size'))
-      return humanizeBytes(parseInt(this.get('hit.size')));
+  }
+
+  get humanizedSize() {
+    if (this.hit.size)
+      return humanizeBytes(parseInt(this.hit.size));
     else
       return "";
-  }),
-  faIcon: computed( 'kind', function() {
+  }
+
+  get faIcon() {
     if( this.kind == "image" )
       return "fa-image";
     else if( this.kind == "video" )
@@ -70,15 +82,13 @@ export default Component.extend({
       return "fa-file";
     else
       return "fa-file-alt"; // fallback is same as any
-  } ),
-  actions: {
-    showMore(){
-      this.toggleProperty('more');
-    },
-    openModal(){
-      this.toggleProperty('openModal');
-      if (typeof this.onOpenDetail === "function")
-        this.onOpenDetail();
+  }
+
+  @action
+  openDetails(){
+    this.detailsAreShown = !this.detailsAreShown;
+    if( this.detailsAreShown && typeof this.args.onOpenDetail === "function" ) {
+      this.args.onOpenDetail();
     }
   }
-});
+}

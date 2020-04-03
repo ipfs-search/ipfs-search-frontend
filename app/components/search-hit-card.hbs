@@ -1,43 +1,43 @@
 {{! template-lint-disable no-triple-curlies }}
-<div {{action "openModal"}} class="list-group-item list-group-item-action flex-column align-items-start {{if selected "selected"}}" data-toggle="modal">
+<div {{action "openDetails"}} class="list-group-item list-group-item-action flex-column align-items-start {{if @selected "selected"}}" data-toggle="modal">
   <div class="d-flex w-100 justify-content-between">
-    <h5 class="mb-1">{{{hit.title}}}</h5>
-    <small class={{availabilityClass}}><span class="d-none d-lg-inline">{{#if hit.last-seen}}Last seen {{moment-from-now hit.last-seen}} {{/if}}</span><i class="fas {{faIcon}}"></i></small>
+    <h5 class="mb-1">{{{@hit.title}}}</h5>
+    <small class={{availabilityClass}}><span class="d-none d-lg-inline">{{#if @hit.last-seen}}Last seen {{moment-from-now @hit.last-seen}} {{/if}}</span><i class="fas {{faIcon}}"></i></small>
   </div>
-  <p class="mb-1">{{{hit.description}}}</p>
-  <small><a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">{{{hit.hash}}}</a>{{#if hit.size}} - {{humanizedSize}}{{/if}}</small>
+  <p class="mb-1">{{{@hit.description}}}</p>
+  <small><a href="https://gateway.ipfs.io/ipfs/{{@hit.hash}}">{{{@hit.hash}}}</a>{{#if @hit.size}} - {{humanizedSize}}{{/if}}</small>
 </div>
 
-{{#bs-modal class="search-result-modal modal fade bd-result-modal-lg" size="lg" open=openModal onSubmit=(action (mut openModal)) onHidden=(action (mut openModal) false) as |modal|}}
-  {{#modal.header}}
+<BsModal class="search-result-modal modal fade bd-result-modal-lg" @size={{"lg"}} @open={{detailsAreShown}} @onSubmit={{action (mut detailsAreShown)}} @onHidden={{action (mut detailsAreShown) false}} as |Modal|>
+  <Modal.header>
     <h5 class="modal-title">
-      {{{hit.title}}}
-      <div class="badge"><small class={{availabilityClass}}><span class="d-none d-lg-inline">{{#if hit.last-seen}}Last seen {{moment-from-now hit.last-seen}} {{/if}}</span><i class="fas {{faIcon}}"></i></small></div>
+      {{{@hit.title}}}
+      <div class="badge"><small class={{availabilityClass}}><span class="d-none d-lg-inline">{{#if @hit.last-seen}}Last seen {{moment-from-now @hit.last-seen}} {{/if}}</span><i class="fas {{faIcon}}"></i></small></div>
     </h5>
-  {{/modal.header}}
-  {{#modal.body}}
+  </Modal.header>
+  <Modal.body>
     {{#if showMetadata}}
-      <MetadataInfo @hit={{hit}} />
+      <MetadataInfo @hit={{@hit}} />
       <span {{action (mut showMetadata) false}} class="btn btn-light">Hide metadata</span>
     {{else}}
       <span {{action (mut showMetadata) true}} class="btn btn-light">Show metadata</span>
     {{/if}}
 
-    <p>{{{hit.description}}}</p>
+    <p>{{{@hit.description}}}</p>
 
     {{#if (eq kind "image")}}
       <div class="embed-responsive image-preview">
-        <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}"><img src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" alt="Preview of found image" /></a>
+        <a href="https://gateway.ipfs.io/ipfs/{{@hit.hash}}"><img src="https://gateway.ipfs.io/ipfs/{{@hit.hash}}" alt="Preview of found image" /></a>
       </div>
     {{/if}}
     {{#if (eq kind "video")}}
       <div class="embed-responsive embed-responsive-16by9">
-        <video class="embed-responsive-item" src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" controls="" preload="metadata" />
+        <video class="embed-responsive-item" src="https://gateway.ipfs.io/ipfs/{{@hit.hash}}" controls="" preload="metadata" />
       </div>
     {{/if}}
     {{#if (eq kind "audio")}}
       <div class="embed-responsive">
-        <audio controls="" src="https://gateway.ipfs.io/ipfs/{{hit.hash}}" />
+        <audio controls="" src="https://gateway.ipfs.io/ipfs/{{@hit.hash}}" />
       </div>
     {{/if}}
 
@@ -46,17 +46,17 @@
         Mimetype
       </dt>
       <dd class="col-sm-9">
-        {{hit.mimetype}}
+        {{@hit.mimetype}}
       </dd>
 
       <dt class="col-sm-3">
         First seen
       </dt>
       <dd class="col-sm-9">
-        {{moment-from-now hit.first-seen}}
+        {{moment-from-now @hit.first-seen}}
       </dd>
 
-      {{#if hit.size}}
+      {{#if @hit.size}}
         <dt class="col-sm-3">
           Size
         </dt>
@@ -70,8 +70,8 @@
         Direct link
       </dt>
       <dd class="col-sm-9">
-        <a href="https://gateway.ipfs.io/ipfs/{{hit.hash}}">{{hit.hash}}</a>
+        <a href="https://gateway.ipfs.io/ipfs/{{@hit.hash}}">{{@hit.hash}}</a>
       </dd>
     </dl>
-  {{/modal.body}}
-{{/bs-modal}}
+  </Modal.body>
+</BsModal>
