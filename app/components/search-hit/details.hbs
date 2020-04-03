@@ -1,0 +1,67 @@
+<BsModal class="search-result-modal modal fade bd-result-modal-lg" @size={{"lg"}} @open={{@open}} @onSubmit={{@onClose}} @onHidden={{@onClose}} as |Modal|>
+  <Modal.header>
+    <h5 class="modal-title">
+      {{{@hit.title}}}
+      <div class="badge"><small class={{css-availability-class @hit}}><span class="d-none d-lg-inline">{{#if @hit.last-seen}}Last seen {{moment-from-now @hit.last-seen}} {{/if}}</span><i class="fas {{fa-kind-icon (hit-kind @hit)}}"></i></small></div>
+    </h5>
+  </Modal.header>
+  <Modal.body>
+    {{#if this.showMetadata}}
+      <MetadataInfo @hit={{@hit}} />
+      <span {{action (mut this.showMetadata) false}} class="btn btn-light">Hide metadata</span>
+    {{else}}
+      <span {{action (mut this.showMetadata) true}} class="btn btn-light">Show metadata</span>
+    {{/if}}
+
+    <p>{{{@hit.description}}}</p>
+
+    {{#if (eq "image" (hit-kind @hit))}}
+      <div class="embed-responsive image-preview">
+        <a href={{hit-url @hit}}><img src={{hit-url @hit}} alt="Preview of found image" /></a>
+      </div>
+    {{/if}}
+    {{#if (eq "video" (hit-kind @hit))}}
+      <div class="embed-responsive embed-responsive-16by9">
+        <video class="embed-responsive-item" src={{hit-url @hit}} controls="" preload="metadata" />
+      </div>
+    {{/if}}
+    {{#if (eq "audio" (hit-kind @hit))}}
+      <div class="embed-responsive">
+        <audio controls="" src={{hit-url @hit}} />
+      </div>
+    {{/if}}
+
+    <dl class="row mt-3">
+      <dt class="col-sm-3">
+        Mimetype
+      </dt>
+      <dd class="col-sm-9">
+        {{@hit.mimetype}}
+      </dd>
+
+      <dt class="col-sm-3">
+        First seen
+      </dt>
+      <dd class="col-sm-9">
+        {{moment-from-now @hit.first-seen}}
+      </dd>
+
+      {{#if @hit.size}}
+        <dt class="col-sm-3">
+          Size
+        </dt>
+        <dd class="col-sm-9">
+          {{readable-size @hit.size}}
+        </dd>
+      {{/if}}
+    </dl>
+    <dl class="row mt-3">
+      <dt class="col-sm-3">
+        Direct link
+      </dt>
+      <dd class="col-sm-9">
+        <a href={{hit-url @hit}}>{{@hit.hash}}</a>
+      </dd>
+    </dl>
+  </Modal.body>
+</BsModal>
