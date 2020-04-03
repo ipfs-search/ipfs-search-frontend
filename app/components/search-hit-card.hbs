@@ -8,4 +8,4 @@
   <small><a href={{hit-url @hit}}>{{{@hit.hash}}}</a>{{#if @hit.size}} - {{readable-size @hit.size}}{{/if}}</small>
 </div>
 
-<SearchHit::Details @open={{detailsAreShown}} @hit={{@hit}} @onClose={{fn this.changeOpenState false}}  />
+<SearchHit::Details @open={{this.detailsAreShown}} @hit={{@hit}} @onClose={{fn this.changeOpenState false}}  />

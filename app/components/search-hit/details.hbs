@@ -1,3 +1,4 @@
+{{! template-lint-disable no-triple-curlies }}
 <BsModal class="search-result-modal modal fade bd-result-modal-lg" @size={{"lg"}} @open={{@open}} @onSubmit={{@onClose}} @onHidden={{@onClose}} as |Modal|>
   <Modal.header>
     <h5 class="modal-title">
@@ -6,12 +7,9 @@
     </h5>
   </Modal.header>
   <Modal.body>
-    {{#if this.showMetadata}}
+    <SearchHit::MetadataControls>
       <MetadataInfo @hit={{@hit}} />
-      <span {{action (mut this.showMetadata) false}} class="btn btn-light">Hide metadata</span>
-    {{else}}
-      <span {{action (mut this.showMetadata) true}} class="btn btn-light">Show metadata</span>
-    {{/if}}
+    </SearchHit::MetadataControls>
 
     <p>{{{@hit.description}}}</p>
 

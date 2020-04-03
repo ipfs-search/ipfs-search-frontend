@@ -1,0 +1,7 @@
+{{#if this.showMetadata}}
+  {{yield}}
+
+  <span {{on "click" (fn (mut this.showMetadata) false)}} class="btn btn-light">Hide metadata</span>
+{{else}}
+  <span {{on "click" (fn (mut this.showMetadata) true)}} class="btn btn-light">Show metadata</span>
+{{/if}}

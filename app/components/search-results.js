@@ -6,6 +6,5 @@ import { A }  from '@ember/array';
 @classic
 @tagName("")
 export default class SearchResults extends Component {
-  openAllResults = false;
   selectedHit = null;
 }
