@@ -25,8 +25,12 @@
     <div class="input-group-append">
       <Dd.menu class="dropdown-menu dropdown-menu-right clickable-menu-items" as |Menu|>
         {{#each this.kindMenu as |menuItem|}}
-          <Menu.item @active={{eq this.kind "file"}} @action={{fn this.changeKind menuItem.kind}}>
-            {{menuItem.label}}
+          <Menu.item>
+            <div
+              class={{concat "dropdown-item " (if (eq this.kind menuItem.kind) "active")}}
+              {{on "click" (fn this.changeKind menuItem.kind)}}>
+              {{menuItem.label}}
+            </div>
           </Menu.item>
         {{/each}}
       </Dd.menu>
