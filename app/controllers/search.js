@@ -1,17 +1,19 @@
+import { action } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject } from '@ember/service';
-import { task } from 'ember-concurrency';
 import fetch from 'fetch';
+import { task } from 'ember-concurrency-decorators';
 
-export default Controller.extend({
-  queryParams: ['search', 'page', 'kind'],
-  search: "",
-  page: 0,
-  kind: "any",
+export default class SearchController extends Controller {
+  queryParams = ['search', 'page', 'kind']
+  search = ""
+  page = 0
+  kind = "any"
 
-  activePageService: inject(),
+  @inject activePageService;
 
-  searchRepo: task(function * ( { kind, page, search } ) {
+  @task( { restartable: true } )
+  *searchRepo( { kind, page, search } ) {
     if( search || ( kind && kind !== "any") ) {
       if( ! search ) { search = ""; }
       let fileOrDirectory = "file";
@@ -55,23 +57,24 @@ export default Controller.extend({
     } else {
       this.set('data', null);
     }
-  }).restartable(),
+  }
 
   executeNewSearch(page = this.page) {
     this.searchRepo.perform( { kind: this.kind, search: this.search, page });
-  },
-
-  actions: {
-    updateSearch( { kind, search } ){
-      this.setProperties( { kind, search } );
-      let page = 0;
-      this.executeNewSearch(page);
-      // // proactively set the target
-      // this.get('activePageService').set('page', 'search-page search-transition-to-results');
-    },
-    setPage( page ) {
-      this.setProperties( { page } );
-      this.searchRepo.perform( { kind: this.kind, search: this.search, page } );
-    }
   }
-});
+
+  @action
+  updateSearch( { kind, search } ){
+    this.setProperties( { kind, search } );
+    let page = 0;
+    this.executeNewSearch(page);
+    // // proactively set the target
+    // this.get('activePageService').set('page', 'search-page search-transition-to-results');
+  }
+
+  @action
+  setPage( page ) {
+    this.setProperties( { page } );
+    this.searchRepo.perform( { kind: this.kind, search: this.search, page } );
+  }
+}
