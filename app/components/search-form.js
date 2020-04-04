@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { localCopy } from 'tracked-toolbox';
 
-export default class RawSearchComponent extends Component {
+export default class SearchFormComponent extends Component {
   @localCopy("args.search") search;
   @localCopy("args.kind") kind;
 
