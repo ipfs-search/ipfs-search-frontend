@@ -1,13 +1,12 @@
-<div ...attributes>
-  <div class="row">
-    <div class="col">
-
-      <div class="list-group">
-        {{#each results.hits as |hit|}}
-          {{search-hit-card hit=hit onOpenDetail=(action (mut selectedHit) hit.hash) selected=(eq hit.hash selectedHit)}}
-        {{/each}}
-      </div>
-
+<div class="row">
+  <div class="col">
+    <div class="list-group">
+      {{#each @results.hits as |hit|}}
+        <SearchHitCard
+          @hit={{hit}}
+          @onOpenDetail={{fn (mut this.selectedHit) hit.hash}}
+          @selected={{eq hit.hash this.selectedHit}} />
+      {{/each}}
     </div>
   </div>
 </div>

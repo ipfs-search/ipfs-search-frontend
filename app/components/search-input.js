@@ -1,7 +1,4 @@
-import classic from "ember-classic-decorator";
-import { tagName } from "@ember-decorators/component";
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
-@classic
-@tagName("")
-export default class SearchInput extends Component {}
+export default class SearchInput extends Component {
+}

@@ -1,44 +1,42 @@
-import { observer } from '@ember/object';
-import { computed } from '@ember/object';
-import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { localCopy } from 'tracked-toolbox';
 
-export default Component.extend({
-  tagName: '',
+export default class RawSearchComponent extends Component {
+  @localCopy("args.search") search;
+  @localCopy("args.kind") kind;
 
-  searchKindLabel: computed('kind', function() {
-    const kind = this.kind;
-    if( kind == "any" ) {
-      return "Filter";
-    } else {
-      return kind || "Filter";
-    }
-  }),
+  kindMenu = [
+    { kind: "file", label: "Any file" },
+    { kind: "image", label: "Image" },
+    { kind: "text", label: "Text" },
+    { kind: "video", label: "Video" },
+    { kind: "audio", label: "Audio" },
+    { kind: "directory", label: "Directory" },
+  ]
 
-  searchPlaceholder: computed('kind', function() {
-    const searchKind = this.kind;
-    return `Search ${searchKind}`;
-  }),
-
-  updateNewSearchStringObserver: observer('search', function() {
-    this.set('newSearchString', this.search);
-  }).on('init'),
-
-  updateNewKindObserver: observer( 'kind', function() {
-    this.set('newSearchKind', this.kind);
-  }).on('init'),
-
-  actions: {
-    updateSearch(){
-      this.onSearch({
-        search: this.newSearchString,
-        kind: this.newSearchKind
-      });
-    },
-    changeKind(kind) {
-      this.onSearch({
-        search: this.newSearchString,
-        kind: kind
-      });
-    }
+  @action
+  changeSearch(event){
+    this.search = event.target.value;
   }
-});
+
+  @action
+  changeKind(kind) {
+    this.kind = kind;
+    this.doSearch();
+  }
+
+  @action
+  submit(event){
+    event.preventDefault();
+    this.doSearch();
+  }
+
+  doSearch(){
+    this.args.onSearch({
+      search: this.search,
+      kind: this.kind
+    });
+  }
+}
