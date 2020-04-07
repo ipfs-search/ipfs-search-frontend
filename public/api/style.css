@@ -14,6 +14,9 @@ p {
 body>p {
   text-align: justify;
 }
+code {
+  text-align: left;
+}
 h3 {
   margin: 2.5ex 0pt 0.5ex 0pt;
 }
