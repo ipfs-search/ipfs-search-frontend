@@ -1,6 +1,5 @@
 <div class="header-wrapper">
   <div class="container">
-
     <div class="row identity d-flex justify-content-center">
       <div class="col identity-wrapper">
         <h1 class="d-flex justify-content-center">
@@ -13,16 +12,15 @@
 
     <div class="row search-bar">
       <div class="col d-flex justify-content-center">
-        {{search-input/raw-search kind=kind search=search onSearch=(action "updateSearch")}}
+        <SearchForm @kind={{this.kind}} @search={{this.search}} @onSearch={{this.updateSearch}} />
       </div>
     </div>
-
   </div>
 </div>
 
 <div class="results-wrapper">
   <div class="container">
-    {{#if searchRepo.isRunning}}
+    {{#if this.isLoading}}
       <div class="row align-items-center" style="min-height: 50vh;">
         <div class="col d-flex justify-content-center">
           <div class="spinner-border" role="status">
@@ -31,7 +29,7 @@
         </div>
       </div>
     {{else}}
-      {{#if errorOccurred}}
+      {{#if this.isError}}
         <div class="row align-items-center" style="min-height: 50vh;">
           <div class="col d-flex justify-content-center" style="color: red;">
             Could not fetch results from the backend.  Please try again later.
@@ -40,17 +38,17 @@
       {{else}}
         <div class="row d-none d-sm-block">
           <div class="col results-header d-flex justify-content-end mt-3">
-            <p><small>We found {{data.total}} results in {{data.page_count}} pages for your search!</small></p>
+            <p><small>We found {{@model.total}} results in {{@model.page_count}} pages for your search!</small></p>
           </div>
         </div>
 
         <div class="search-results">
-          {{search-results results=data}}
+          <SearchResults @results={{@model}} />
         </div>
 
         <div class="row">
           <div class="col d-flex justify-content-end">
-            {{page-list totalPages=data.page_count currentPage=data.page on-change=(action "setPage")}}
+            <PageList @totalPages={{@model.page_count}} @currentPage={{@model.page}} @on-change={{fn (mut this.page)}} />
           </div>
         </div>
       {{/if}}

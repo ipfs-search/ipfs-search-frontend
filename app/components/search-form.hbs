@@ -1,0 +1,43 @@
+<form class="col-md-8 col-lg-8 input-group" {{on "submit" (fn this.submit)}}>
+  <input
+    class="form-control"
+    placeholder="Search..."
+    aria-label="Search"
+    value={{this.search}}
+    {{on "change" this.changeSearch}}
+  />
+
+  <BsDropdown class="input-group-append" as |Dd|>
+    <Dd.button
+      class="btn btn-outline-secondary dropdown-toggle"
+      type="button"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false">
+      {{#if (eq this.kind "Any")}}
+        Filter
+      {{else}}
+        {{this.kind}}
+      {{/if}}
+      <span class="sr-only">Toggle Dropdown</span>
+    </Dd.button>
+
+    <div class="input-group-append">
+      <Dd.menu class="dropdown-menu dropdown-menu-right clickable-menu-items" as |Menu|>
+        {{#each this.kindMenu as |menuItem|}}
+          <Menu.item>
+            <div
+              class={{concat "dropdown-item " (if (eq this.kind menuItem.kind) "active")}}
+              {{on "click" (fn this.changeKind menuItem.kind)}}>
+              {{menuItem.label}}
+            </div>
+          </Menu.item>
+        {{/each}}
+      </Dd.menu>
+
+      <button class="btn btn-outline-secondary search-button" type="submit">
+        <span class="glyphicons glyphicons-search"></span>
+      </button>
+    </div>
+  </BsDropdown>
+</form>

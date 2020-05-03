@@ -1,4 +1,4 @@
-{{#if fetchMetadat.isRunning}}
+{{#if this.fetchMetadata.isRunning}}
   ...loading metadata...
 {{else}}
   <div class="table-responsive">
@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        {{#each tableContents as |row|}}
+        {{#each this.tableContents as |row|}}
           <tr>
             <td scope="row" class="bg-light">{{row.key}}</td>
             <td scope="row">{{row.valueString}}</td>

@@ -1,36 +1,36 @@
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import { task, timeout } from 'ember-concurrency';
-import { inject } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import Component from '@glimmer/component';
+import { timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
+import fetch from 'fetch';
 
-export default Component.extend({
-  init(){
-    this._super(...arguments);
+export default class MetdataInfoComponent extends Component {
+  @tracked metadata = null;
+
+  constructor(){
+    super( ...arguments );
     this.fetchMetadata.perform();
-  },
+  }
 
-  didReceiveAttrs(){
-    this.fetchMetadata.perform();
-  },
-
-  ajax: inject(),
-
-  fetchMetadata: task( function * () {
-    const hash = this.get('hit.hash');
+  @task({restartable: true})
+  *fetchMetadata() {
+    const hash = this.args.hit.hash;
 
     yield timeout( 50 );
 
     if( !hash ) return;
 
-    const response = yield this.ajax.request(`https://api.ipfs-search.com/v1/metadata/${hash}`);
-    this.set('metadata', response.metadata);
-  } ).restartable(),
+    const req = yield fetch(`https://api.ipfs-search.com/v1/metadata/${hash}`);
+    const response = yield req.json();
 
-  tableContents: computed('metadata', function() {
-    const metadataObject = this.get("metadata") || {};
+    this.metadata = response.metadata;
+  }
+
+  get tableContents() {
+    const metadataObject = this.metadata || {};
 
     return Object.entries( metadataObject ).map( ([key, values]) => {
-      return { key: key, valueString: values.join(",") };
-    } );
-  })
-});
+      return { key, valueString: values.join(",") };
+    });
+  }
+}

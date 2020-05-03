@@ -1,10 +1,12 @@
-import { computed } from '@ember/object';
+import classic from "ember-classic-decorator";
+import { computed } from "@ember/object";
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-
-  searchPlaceholder: computed('kind', function() {
+@classic
+export default class ResultsController extends Controller {
+  @computed('kind')
+  get searchPlaceholder() {
     const searchKind = this.kind;
     return `Search ${searchKind}`;
-  })
-});
+  }
+}

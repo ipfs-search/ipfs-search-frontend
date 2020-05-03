@@ -10,6 +10,8 @@
 /.package-lock.json
 
 # misc
+/.env*
+/.pnp*
 /.sass-cache
 /connect.lock
 /coverage/
