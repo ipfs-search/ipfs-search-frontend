@@ -1,7 +1,6 @@
-import Component from '@ember/component';
-import { A }  from '@ember/array';
+import { tracked } from '@glimmer/tracking';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  openAllResults: false,
-  selectedHit: null
-});
+export default class SearchResults extends Component {
+  @tracked selectedHit = null;
+}

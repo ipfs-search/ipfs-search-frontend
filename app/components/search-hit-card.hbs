@@ -1,0 +1,11 @@
+{{! template-lint-disable no-triple-curlies }}
+<div {{on "click" (fn this.changeOpenState true)}} class="list-group-item list-group-item-action flex-column align-items-start {{if @selected "selected"}}" data-toggle="modal">
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">{{{@hit.title}}}</h5>
+    <small class={{css-availability-class @hit}}><span class="d-none d-lg-inline">{{#if @hit.last-seen}}Last seen {{moment-from-now @hit.last-seen}} {{/if}}</span><i class="fas {{fa-kind-icon (hit-kind @hit)}}"></i></small>
+  </div>
+  <p class="mb-1">{{{@hit.description}}}</p>
+  <small><a href={{hit-url @hit}}>{{{@hit.hash}}}</a>{{#if @hit.size}} - {{readable-size @hit.size}}{{/if}}</small>
+</div>
+
+<SearchHit::Details @open={{this.detailsAreShown}} @hit={{@hit}} @onClose={{fn this.changeOpenState false}}  />
