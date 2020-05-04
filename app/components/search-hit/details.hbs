@@ -20,7 +20,11 @@
     {{/if}}
     {{#if (eq "video" (hit-kind @hit))}}
       <div class="embed-responsive embed-responsive-16by9">
-        <video class="embed-responsive-item" src={{hit-url @hit}} controls="" preload="metadata" />
+        <video class="embed-responsive-item" controls="" preload="metadata">
+          {{#each (hit-urls @hit) as |hitUrl|}}
+             <source src={{hitUrl}} >
+          {{/each}}
+        </video>
       </div>
     {{/if}}
     {{#if (eq "audio" (hit-kind @hit))}}
