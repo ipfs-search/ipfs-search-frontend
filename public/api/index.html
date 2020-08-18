@@ -10,33 +10,55 @@
     <h2><span class="uglyred">NEW</span>: <a href="https://github.com/ipfs-search/ipfs-search/blob/master/docs/snapshots.md">Snapshots</a>!</h2>
     <h2>Search</h2>
     <p>Not much here yet, but try:
-        <code>GET <a href="/v1/search?q=water">/v1/search?q=water</a></code>
+        <code>GET <a href="/v1/search?q=water">/v1/search?q=water&type=file</a></code>
     </p>
 
     <h2>Example</h2>
     <pre>{
-    "total": 82118,
-    "max_score": 52.767845,
+    "total": 10000,
+    "max_score": 41.661648,
     "hits": [
         {
-            "hash": "QmYHPTi6ih88CFtX4KCu4bpWHtNZGG2V4PTB49v6bBa97q",
-            "title": "Lackey, Mercedes - Diana Tregarde 2 - Burning <em>Water</em> (.rtf v2.0)",
-            "description": null,
-            "type": "directory",
-            "size": 0,
-            "last-seen": "2019-05-01T12:11:07Z",
-            "score": 52.767845
-        },
-        {
-            "hash": "Qmcgwxyyv4arJTyiWy6dL9NQ1x3XKSGvi6pXqF2fyePD1Q",
-            "title": "Wind and <em>Water</em> - Puzzle Battles (World) (Unl).mp4",
+            "hash": "bafybeigtuyici4rove5cos3ak5modqodkhez6s7z4ij3ti6icp5fr55lwq",
+            "title": "th.jpe-<em>water</em>-photo-300x225.jpe",
             "description": null,
             "type": "file",
-            "size": 3243565,
-            "first-seen": "2019-04-23T16:47:23Z",
-            "last-seen": "2019-04-23T16:47:23Z",
-            "score": 52.129974,
-            "mimetype": "application/mp4"
+            "size": 13193,
+            "first-seen": "2020-07-22T22:37:01Z",
+            "last-seen": "2020-07-22T22:44:43Z",
+            "score": 41.661648,
+            "references": [
+                {
+                    "name": "th.jpe-water-photo-300x225.jpe",
+                    "parent_hash": "QmcwoZUz6bdWhwLjMxzSVitc1Srpe1pJtyZ3XVgdxYMAr2"
+                },
+                {
+                    "name": "th.jpe-water-photo-300x225.jpe",
+                    "parent_hash": "QmReHsha5wQBGuEMNPdRceNPebSp7nQR8RkfZB4R4wwuCc"
+                }
+            ],
+            "mimetype": "image/jpeg"
+        },
+        {
+            "hash": "bafybeicgvsglr4mziieciu56gbdpv5joqdpykrq65ijlrhhxb2rdo6pyyq",
+            "title": "th.jpe-<em>water</em>-photo-150x150.jpe",
+            "description": null,
+            "type": "file",
+            "size": 5644,
+            "first-seen": "2020-07-22T22:37:01Z",
+            "last-seen": "2020-07-22T22:44:43Z",
+            "score": 41.203224,
+            "references": [
+                {
+                    "name": "th.jpe-water-photo-150x150.jpe",
+                    "parent_hash": "QmcwoZUz6bdWhwLjMxzSVitc1Srpe1pJtyZ3XVgdxYMAr2"
+                },
+                {
+                    "name": "th.jpe-water-photo-150x150.jpe",
+                    "parent_hash": "QmReHsha5wQBGuEMNPdRceNPebSp7nQR8RkfZB4R4wwuCc"
+                }
+            ],
+            "mimetype": "image/jpeg"
         },
         ...
     ]
@@ -47,7 +69,7 @@
         <code>GET <a href="/v1/search?q=something">/v1/search?q=references.name:*.html</a></code>
     </p>
     <p>And by type (currently, `file` and `directory`):<br>
-        <code>GET <a href="/v1/search?q=_type:directory">/v1/search?q=_type:directory</a></code>
+        <code>GET <a href="/v1/search?q=type:directory">/v1/search?q=type:directory</a></code>
     </p>
     <p>Only consider objects seen within the last month:<br>
         <code>GET <a href="/v1/search?q=last-seen:&gt;now-1M">/v1/search?q=last-seen:&gt;now-1M</a></code>
