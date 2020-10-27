@@ -34,21 +34,26 @@ export default class SearchRoute extends Route {
 
   @action
   async model({search, kind, page}) {
-    const query = (search + getContentFilter(kind)) || '*';
-    const type = getType(kind);
+    // Launch search if query *or* kind are given - otherwise home page not rendered well.
+    if (search || kind != 'any') {
+      // Query or wildcard (anything)
+      const query = (search + getContentFilter(kind)) || '*';
+      const type = getType(kind);
 
-    console.log('Query:', query);
-    console.log('Type:', type);
+      console.log('Query:', query);
+      console.log('Type:', type);
 
-    const req = await fetch(`https://api.ipfs-search.com/v1/search?q=${encodeURIComponent(query)}&type=${type}&page=${encodeURIComponent(page)}`);
-    const data = await req.json();
+      const req = await fetch(`https://api.ipfs-search.com/v1/search?q=${encodeURIComponent(query)}&type=${type}&page=${encodeURIComponent(page)}`);
+      const data = await req.json();
 
-    data.kind = kind;
-    data.search = search;
-    data.page = page;
+      data.kind = kind;
+      data.search = search;
+      data.page = page;
 
-    return data;
+      return data;
+    }
 
+    return null;
   }
 
   @action
