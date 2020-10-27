@@ -8,7 +8,7 @@ export default class SearchFormComponent extends Component {
   @localCopy("args.kind") kind;
 
   kindMenu = [
-    { kind: "file", label: "Any file" },
+    { kind: "any", label: "Any" },
     { kind: "image", label: "Image" },
     { kind: "text", label: "Text" },
     { kind: "video", label: "Video" },
