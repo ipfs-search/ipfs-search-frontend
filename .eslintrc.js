@@ -42,7 +42,6 @@ module.exports = {
       env: {
         browser: false,
         node: true
-<<<<<<< HEAD
       }
     },
 
@@ -52,8 +51,7 @@ module.exports = {
       excludedFiles: ['tests/dummy/**/*.js'],
       env: {
         embertest: true
-      }
-=======
+
       },
       plugins: ['node'],
       rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
@@ -63,7 +61,6 @@ module.exports = {
         // https://github.com/mysticatea/eslint-plugin-node/issues/77
         'node/no-unpublished-require': 'off'
       })
->>>>>>> 74c3251... v3.9.0...v3.17.0
     }
   ]
 };
