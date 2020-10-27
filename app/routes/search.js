@@ -34,6 +34,28 @@ function makeTypeFilter(typeList) {
   return ' metadata.Content-Type:('+typeList.map(x => '"'+x+'"').join(' OR ')+')';
 }
 
+function getContentFilter(kind) {
+  switch (kind) {
+    case 'image':
+      return ' metadata.Content-Type:image*';
+    case 'text':
+      return makeTypeFilter(textTypes);
+    case 'video':
+      return ' metadata.Content-Type:(video* OR "application/mp4")';
+    case 'audio':
+      return ' metadata.Content-Type:(audio* OR "application/ogg")';
+  }
+
+  // empty kind, any or directory
+  return '';
+}
+
+function getType(kind) {
+  if (kind === 'directory') return kind;
+
+  return 'file';
+}
+
 export default class SearchRoute extends Route {
   @service activePageService
 
@@ -45,41 +67,21 @@ export default class SearchRoute extends Route {
 
   @action
   async model({search, kind, page}) {
-    if( search || ( kind && kind !== "any") ) {
-      if( ! search ) { search = ""; }
-      let fileOrDirectory = "file";
-      if( kind ){
-        if( kind == "image" ) {
-          search += " metadata.Content-Type:image*";
-        }
-        if( kind == "text" ) {
-          search += makeTypeFilter(textTypes);
-        }
-        if( kind == "video" ) {
-          search += ' metadata.Content-Type:(video* OR "application/mp4")';
-        }
-        if( kind == "audio" ) {
-          search += ' metadata.Content-Type:(audio* OR "application/ogg")';
-        }
-        if( kind == "directory" ) {
-          fileOrDirectory = "directory";
-        }
-      }
+    const query = (search + getContentFilter(kind)) || '*';
+    const type = getType(kind);
 
-      if( kind == "directory" )
-        search += " _type:directory";
+    console.log('Query:', query);
+    console.debug('Type:', type);
 
-      console.log("Search query: ", search);
+    const req = await fetch(`https://api.ipfs-search.com/v1/search?q=${encodeURIComponent(query)}&type=${type}&page=${encodeURIComponent(page)}`);
+    const data = await req.json();
 
-      const req = await fetch(`https://api.ipfs-search.com/v1/search?q=${encodeURIComponent(search)}&page=${encodeURIComponent(page)}`);
-      const data = await req.json();
-      data.kind = kind;
-      data.search = search;
-      data.page = page;
-      return data;
-    } else {
-      return null;
-    }
+    data.kind = kind;
+    data.search = search;
+    data.page = page;
+
+    return data;
+
   }
 
   @action
