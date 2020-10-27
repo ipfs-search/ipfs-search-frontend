@@ -4,50 +4,17 @@ import { action } from "@ember/object";
 import Route from '@ember/routing/route';
 import fetch from 'fetch';
 
-const textTypes = [
-  // eBook types
-  'application/x-mobipocket-ebook',
-  'application/epub+zip',
-  'application/vnd.amazon.ebook',
-  // Scanned documents
-  'image/vnd.djvu',
-  'application/pdf',
-  // HTML/plain text
-  'text/html',
-  'text/plain',
-  // Text editors
-  'application/postscript',
-  'application/rtf',
-  // Open Office et al.
-  'application/vnd.oasis.opendocument.text',
-  'application/vnd.sun.xml.writer',
-  'application/vnd.stardivision.writer',
-  'application/x-starwriter',
-  // MS Word
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  // Misc
-  'application/x-abiword',
-]
+import types from './../utils/types';
 
 function makeTypeFilter(typeList) {
-  return ' metadata.Content-Type:('+typeList.map(x => '"'+x+'"').join(' OR ')+')';
+  // Add quotes for literals, leave wildcards as-is
+  const t = typeList.map(x => (x.includes('*') && x) || '"'+x+'"')
+  return ' metadata.Content-Type:('+t.join(' OR ')+')';
 }
 
 function getContentFilter(kind) {
-  switch (kind) {
-    case 'image':
-      return ' metadata.Content-Type:image*';
-    case 'text':
-      return makeTypeFilter(textTypes);
-    case 'video':
-      return ' metadata.Content-Type:(video* OR "application/mp4")';
-    case 'audio':
-      return ' metadata.Content-Type:(audio* OR "application/ogg")';
-  }
-
-  // empty kind, any or directory
-  return '';
+  // Lookup known kinds (video, audio, text, image) or return '' (any or directory)
+  return (types[kind] && makeTypeFilter(types[kind])) || '';
 }
 
 function getType(kind) {
@@ -71,7 +38,7 @@ export default class SearchRoute extends Route {
     const type = getType(kind);
 
     console.log('Query:', query);
-    console.debug('Type:', type);
+    console.log('Type:', type);
 
     const req = await fetch(`https://api.ipfs-search.com/v1/search?q=${encodeURIComponent(query)}&type=${type}&page=${encodeURIComponent(page)}`);
     const data = await req.json();

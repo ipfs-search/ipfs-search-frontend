@@ -1,20 +1,35 @@
+import types from './../utils/types';
+
 export default function hitKind(hit) {
   const type = hit.type;
   const mimetype = hit.mimetype;
 
-  if( type === "directory" ) {
+  if (type === "directory") {
     return "directory";
-  } else if( ! mimetype ) {
-    return "file";
-  } else if( mimetype.indexOf("image") === 0 ) {
-    return "image";
-  } else if( mimetype.indexOf("text") === 0 ) {
-    return "text";
-  } else if( mimetype.indexOf("video") === 0 ) {
-    return "video";
-  } else if( mimetype.indexOf("audio") === 0 ) {
-    return "audio";
-  } else {
-    return "any";
   }
+
+  // No mimetype set; generic 'file'
+  if (!mimetype) {
+    return "file";
+  }
+  console.log(mimetype)
+
+  let kind ='any';
+  Object.keys(types).some(k => {
+    // TODO; create cache of matchers
+    if (types[k].some(m => {
+        console.log(mimetype, m);
+        const matcher = new RegExp(m.replace('*', '.*'))
+        const r = matcher.test(mimetype);
+        console.log(r);
+        return r;
+      })) {
+      console.log(k);
+      // One matches, return
+      kind = k;
+      return true;
+    }
+  });
+
+  return kind;
 }
