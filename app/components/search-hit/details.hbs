@@ -74,6 +74,7 @@
           {{#each @hit.references as |reference|}}
             <tr>
               <td scope="row" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 12em;"><a target="_blank" href="{{ hash-url reference.parent_hash }}">{{ reference.parent_hash }}</a></td>
+              <td>{{#link-to "search" (query-params search=reference.parent_hash) }}<i class="fas fa-search"></i>{{/link-to}}</td>
               <td>/</td>
               <td><a href="{{ reference-url reference }}">{{ reference.name }}</a></td>
               <td><a href="{{ reference-url reference true }}"><i class="fas fa-download"></i></a></td>
