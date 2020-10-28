@@ -34,10 +34,10 @@ export default class SearchRoute extends Route {
 
   @action
   async model({search, kind, page}) {
-    // Launch search if query *or* kind are given - otherwise home page not rendered well.
-    if (search || kind != 'any') {
+    // Launch search if query specified.
+    if (search) {
       // Query or wildcard (anything)
-      const query = (search + getContentFilter(kind)) || '*';
+      const query = (search + getContentFilter(kind));
       const type = getType(kind);
 
       console.log('Query:', query);
