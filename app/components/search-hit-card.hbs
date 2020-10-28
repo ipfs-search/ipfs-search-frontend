@@ -5,7 +5,7 @@
     <small class={{css-availability-class @hit}}><span class="d-none d-lg-inline">{{#if @hit.last-seen}}Last seen {{moment-from-now @hit.last-seen}} {{/if}}</span><i class="fas {{fa-kind-icon (hit-kind @hit)}}"></i></small>
   </div>
   <p class="mb-1">{{{@hit.description}}}</p>
-  <small><a href={{hit-url @hit}}>{{#if @hit.references }}{{@hit.references.0.name}}{{ else }}{{ @hit.hash }}{{/if}}</a>{{#if @hit.size}} - {{readable-size @hit.size}}{{/if}} - {{ hit-extension @hit }}</small>
+  <small><a href="{{hit-url @hit}}" target="_blank">{{ hit-name @hit }}</a> <a href="{{hit-url @hit true}}"><i class="fas fa-download"></i></a></small> {{#if @hit.size}} - {{readable-size @hit.size}}{{/if}} - {{ hit-extension @hit }}
 </div>
 
 <SearchHit::Details @open={{this.detailsAreShown}} @hit={{@hit}} @onClose={{fn this.changeOpenState false}}  />
