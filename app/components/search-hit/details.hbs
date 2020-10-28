@@ -60,15 +60,29 @@
     </dl>
 
     {{#if @hit.references }}
-    <h5>References</h5>
-    <ul>
-      {{#each @hit.references as |reference|}}
-        <li class="row mt-3">
-          <a target="_blank" href="{{ hash-url reference.parent_hash }}">{{ reference.parent_hash }}</a>&nbsp;/&nbsp;<a href="{{ reference-url reference }}">{{ reference.name }}</a>&nbsp;<a href="{{ reference-url reference true }}"><i class="fas fa-download"></i></a>
-        </li>
-      {{/each}}
-    </ul>
-    {{/if}}
+      <div class="table-responsive-sm">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Parent hash</th>
+            <th/>
+            <th scope="col">Name</th>
+            <th/>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each @hit.references as |reference|}}
+            <tr>
+              <td scope="row" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 12em;"><a target="_blank" href="{{ hash-url reference.parent_hash }}">{{ reference.parent_hash }}</a></td>
+              <td>/</td>
+              <td><a href="{{ reference-url reference }}">{{ reference.name }}</a></td>
+              <td><a href="{{ reference-url reference true }}"><i class="fas fa-download"></i></a></td>
+            </tr>
+          {{/each}}
+        </tbody>
+     </table>
+    </div>
+   {{/if}}
 
     <h5>Direct link</h5>
     <ul>
