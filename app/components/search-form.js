@@ -9,11 +9,11 @@ export default class SearchFormComponent extends Component {
 
   kindMenu = [
     { kind: "any", label: "Any" },
-    { kind: "image", label: "Image" },
     { kind: "text", label: "Text" },
-    { kind: "video", label: "Video" },
     { kind: "audio", label: "Audio" },
+    { kind: "video", label: "Video" },
     { kind: "directory", label: "Directory" },
+    { kind: "image", label: "Image" },
   ]
 
   @action
