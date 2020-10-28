@@ -92,8 +92,10 @@
       </li>
     </ul>
 
+    {{#unless (eq "directory" (hit-kind @hit))}}
     <SearchHit::MetadataControls>
       <MetadataInfo @hit={{@hit}} />
     </SearchHit::MetadataControls>
+    {{/unless}}
   </Modal.body>
 </BsModal>
