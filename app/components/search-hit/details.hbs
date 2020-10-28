@@ -13,12 +13,12 @@
 
     {{#if (eq "image" (hit-kind @hit))}}
       <div class="embed-responsive image-preview">
-        <a href={{hit-url @hit}}><img src={{hit-url @hit}} alt="Preview of found image" /></a>
+        <a href={{hit-url @hit}}><img src={{hit-url @hit}} style="height: 256px" alt="Preview of found image" /></a>
       </div>
     {{/if}}
     {{#if (eq "video" (hit-kind @hit))}}
       <div class="embed-responsive embed-responsive-16by9">
-        <video class="embed-responsive-item" src={{hit-url @hit}} controls="" preload="metadata" />
+        <video class="embed-responsive-item" style="min-height: 256px" src={{hit-url @hit}} controls="" preload="metadata" />
       </div>
     {{/if}}
     {{#if (eq "audio" (hit-kind @hit))}}
