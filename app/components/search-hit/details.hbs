@@ -88,7 +88,9 @@
     <h5>Direct link</h5>
     <ul>
       <li class="row mt-3">
-        <a target="_blank" href="{{ hash-url @hit.hash }}">{{ @hit.hash }}</a>&nbsp;<a href="{{ hash-url @hit.hash true }}"><i class="fas fa-download"></i></a>
+        <a target="_blank" href="{{ hash-url @hit.hash }}" title="View on gateway">{{ @hit.hash }}</a>
+        <a href="{{ hash-url @hit.hash true }}" title="Download from gateway"><i class="fas fa-download"></i></a>
+        <button class="btn" onclick={{action "copyHitHash"}} tooltip="Copy hash to clipboard"><i class="fas fa-copy"></i></button>
       </li>
     </ul>
 
