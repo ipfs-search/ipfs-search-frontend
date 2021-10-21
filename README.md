@@ -1,7 +1,7 @@
 # ipfs-search
-
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+## This repository is deprecated
+This repository remains archival purposes only. 
+Please refer to the new frontend: https://github.com/ipfs-search/dweb-search-frontend
 
 ## Prerequisites
 
